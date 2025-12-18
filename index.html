@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio Empresas v1.1 - Firebase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0e27; --bg-secondary: #151935; --bg-card: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff; --text-secondary: #a0a8c8; --accent: #6366f1;
+            --accent-light: #818cf8; --success: #10b981; --border: rgba(255, 255, 255, 0.1);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+            color: var(--text-primary); min-height: 100vh; overflow-x: hidden;
+        }
+        
+        .header {
+            position: relative; padding: 2rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1;
+        }
+        
+        .header-content {
+            max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 2rem;
+        }
+        
+        h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #a0a8c8 100%);
+             -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .subtitle { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        .sync-status {
+            display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05); border-radius: 10px; font-size: 0.9rem; margin-left: auto;
+        }
+        
+        .sync-status.syncing { color: #fbbf24; }
+        .sync-status.synced { color: var(--success); }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+        
+        .loading {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 14, 39, 0.95); display: flex; align-items: center;
+            justify-content: center; z-index: 9999; flex-direction: column; gap: 1rem;
+        }
+        
+        .loading.hidden { display: none; }
+        
+        .spinner {
+            width: 50px; height: 50px; border: 4px solid rgba(99, 102, 241, 0.2);
+            border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .notification {
+            position: fixed; top: 2rem; right: 2rem;
+            background: linear-gradient(135deg, var(--success) 0%, #34d399 100%);
+            color: white; padding: 1rem 1.5rem; border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4); display: none;
+            align-items: center; gap: 0.75rem; z-index: 3000; font-weight: 600;
+        }
+        
+        .notification.show { display: flex; animation: slideIn 0.3s ease; }
+        
+        @keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <div style="color: var(--text-primary); font-size: 1.2rem; font-weight: 600;">
+            Conectando con Firebase...
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <h1>🔥 Directorio Empresas v1.1</h1>
+                <p class="subtitle">Sistema Colaborativo en la Nube</p>
+            </div>
+            <div class="sync-status synced" id="syncStatus">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span id="syncText">Sincronizado</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div style="padding: 3rem; text-align: center;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">🚀</div>
+            <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--text-primary);">
+                ¡Firebase Conectado Exitosamente!
+            </h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">
+                Tu sistema está listo para sincronización en tiempo real. Ahora voy a migrar todos tus datos desde localStorage a Firebase.
+            </p>
+            <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid var(--accent); border-radius: 12px; padding: 1.5rem; max-width: 700px; margin: 0 auto;">
+                <h3 style="color: var(--accent); margin-bottom: 1rem;">✅ Próximos pasos:</h3>
+                <ol style="text-align: left; color: var(--text-secondary); line-height: 2;">
+                    <li>Inicializar la base de datos con tus 9 empresas</li>
+                    <li>Configurar listeners en tiempo real</li>
+                    <li>Probar la sincronización entre dispositivos</li>
+                    <li>Agregar autenticación (opcional)</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText"></span>
+    </div>
+
+    <script>
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJCDWaT6lJwB7nMHsOgVmwAK9USVOT6wE",
+            authDomain: "directorio-empresas-2025.firebaseapp.com",
+            projectId: "directorio-empresas-2025",
+            storageBucket: "directorio-empresas-2025.firebasestorage.app",
+            messagingSenderId: "193370046732",
+            appId: "1:193370046732:web:ad0f3bb81f810502b68929",
+            measurementId: "G-7FQC99BP0V"
+        };
+
+        // Inicializar Firebase
+        let db;
+        
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            
+            // Probar conexión
+            db.collection('test').doc('connection').set({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                message: 'Firebase conectado correctamente'
+            }).then(() => {
+                console.log('✅ Firebase conectado exitosamente');
+                updateSyncStatus('synced', 'Conectado a Firebase');
+                showNotification('✅ Sistema conectado a Firebase');
+                setTimeout(() => {
+                    document.getElementById('loading').classList.add('hidden');
+                }, 1500);
+            }).catch((error) => {
+                console.error('Error al conectar con Firebase:', error);
+                updateSyncStatus('error', 'Error de conexión');
+                showNotification('❌ Error al conectar: ' + error.message);
+            });
+            
+        } catch (error) {
+            console.error('Error al inicializar Firebase:', error);
+            alert('Error al inicializar Firebase: ' + error.message);
+        }
+
+        function updateSyncStatus(status, text) {
+            const statusEl = document.getElementById('syncStatus');
+            const textEl = document.getElementById('syncText');
+            
+            statusEl.className = 'sync-status ' + status;
+            textEl.textContent = text;
+        }
+
+        function showNotification(text) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = text;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // TEST: Leer datos de prueba
+        setTimeout(() => {
+            if (db) {
+                db.collection('test').doc('connection').get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            console.log('📄 Datos de prueba:', doc.data());
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error al leer datos:', error);
+                    });
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
