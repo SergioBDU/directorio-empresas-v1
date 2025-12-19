@@ -161,6 +161,24 @@
                 const snap = await db.collection('empresas').orderBy('nombreComercial').get();
                 data = [];
                 snap.forEach(doc => data.push({ id: doc.id, ...doc.data() }));
+                
+                // Si no hay datos, mostrar opción de inicializar
+                if (data.length === 0) {
+                    document.getElementById('load').innerHTML = `
+                        <div style="text-align: center; max-width: 600px;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🚀</div>
+                            <h2 style="font-size: 2rem; margin-bottom: 1rem;">¡Firebase Conectado!</h2>
+                            <p style="color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem;">
+                                Tu base de datos está vacía. Haz click para cargar las 9 empresas iniciales.
+                            </p>
+                            <button class="btn" onclick="init()" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
+                                <i class="fas fa-database"></i> Cargar 9 Empresas
+                            </button>
+                        </div>
+                    `;
+                    return;
+                }
+                
                 render();
                 stats();
                 status('synced', 'Sincronizado');
@@ -287,7 +305,6 @@
         }
 
         async function init() {
-            if (!confirm('¿Cargar 9 empresas iniciales en Firebase?')) return;
             const emp = [
                 { nombreComercial: "Actividades Inteligentes", razonSocial: "Actividades Inteligentes DS SAPI de CV", responsable: "", logo: "https://thumbs2.imgbox.com/be/6f/X3aIUYqg_t.jpg", color: "#FF6B6B", direccion: { calle: "Jaime Balmes", numero: "11", colonia: "Polanco I Sección" }, proveedor: { nombre: "Sach Plaza Polanco", contacto: "Sergio Ramírez", email: "gerenciaplazapolanco@sach.mx", telefono: "55 4165 5959" } },
                 { nombreComercial: "Diseños y Aplicaciones T&C", razonSocial: "Diseños y Aplicaciones T&C S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c3/8b/RWtwVANG_t.jpg", color: "#4ECDC4", direccion: { calle: "Lago Alberto", numero: "442", colonia: "Anáhuac I Sección" }, proveedor: { nombre: "Sach Lago Alberto", contacto: "Gabriela Mancilla", email: "gerencialagoalberto@sach.mx", telefono: "55 6813 3053" } },
@@ -300,10 +317,14 @@
                 { nombreComercial: "Mesón Delta", razonSocial: "TU ORDEN LATAM", responsable: "", logo: "https://thumbs2.imgbox.com/db/af/CpyLY3SV_t.jpg", color: "#34D399", direccion: { calle: "Emerson", numero: "243", colonia: "Polanco V Sección" }, proveedor: { nombre: "Servicios AH Leal", contacto: "Alejandro Mota", email: "serviciosahleal@gmail.com", telefono: "55 5437 0804" } }
             ];
             try {
+                document.getElementById('load').innerHTML = `
+                    <div class="spin"></div>
+                    <div style="color: var(--text); font-size: 1.1rem; font-weight: 600;">Cargando 9 empresas a Firebase...</div>
+                `;
                 status('syncing', 'Inicializando...');
                 for (const e of emp) await db.collection('empresas').add(e);
                 await load();
-                notif('✓ 9 empresas agregadas');
+                notif('✓ 9 empresas cargadas exitosamente');
             } catch (e) {
                 notif('❌ Error: ' + e.message);
                 status('synced', 'Error');
