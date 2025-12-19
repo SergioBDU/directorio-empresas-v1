@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Directorio Empresas v1.1 - Firebase</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Directorio Empresas v1.1 Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -34,43 +34,63 @@
         .search i { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
         .btn { padding: 0.75rem 1.25rem; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s; background: linear-gradient(135deg, var(--accent), #818cf8); color: white; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99,102,241,0.4); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5rem; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: all 0.3s; position: relative; }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--card-color, var(--accent)); }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        .card-head { padding: 1.5rem; display: flex; align-items: center; gap: 1.25rem; border-bottom: 1px solid var(--border); }
-        .logo-img { width: 70px; height: 70px; object-fit: contain; border-radius: 12px; background: rgba(255,255,255,0.95); padding: 0.6rem; }
-        .card-text { flex: 1; }
-        .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; }
-        .card-sub { color: var(--text-dim); font-size: 0.85rem; }
-        .resp-box { margin-top: 0.6rem; display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.8rem; background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.3); border-radius: 8px; font-size: 0.8rem; }
-        .resp-box button { margin-left: auto; background: rgba(255,255,255,0.1); border: none; width: 24px; height: 24px; border-radius: 6px; cursor: pointer; color: var(--text); font-size: 0.75rem; }
-        .btn-resp { margin-top: 0.6rem; padding: 0.4rem 0.8rem; background: rgba(255,255,255,0.05); border: 1px dashed var(--border); border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; color: var(--text-dim); font-size: 0.8rem; }
-        .card-body { padding: 1.5rem; }
-        .info { margin-bottom: 1.25rem; }
-        .info-label { font-weight: 600; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
-        .info-text { color: var(--text); line-height: 1.5; font-size: 0.9rem; }
-        .prov { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-top: 1.25rem; position: relative; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 2rem; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; transition: all 0.4s; position: relative; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: var(--card-color, var(--accent)); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 25px 70px rgba(0,0,0,0.3); }
+        .card-head { padding: 2rem; display: flex; align-items: center; gap: 1.5rem; border-bottom: 1px solid var(--border); }
+        .logo-img { width: 80px; height: 80px; object-fit: contain; border-radius: 16px; background: rgba(255,255,255,0.95); padding: 0.75rem; box-shadow: 0 8px 24px rgba(0,0,0,0.2); flex-shrink: 0; }
+        .card-text { flex: 1; position: relative; z-index: 10; }
+        .card-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card-sub { color: var(--text-dim); font-size: 0.9rem; line-height: 1.4; }
+        .resp-box { margin-top: 0.75rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, rgba(99,102,241,0.2) 0%, rgba(139,92,246,0.2) 100%); border: 1px solid rgba(99,102,241,0.3); border-radius: 10px; position: relative; z-index: 100; }
+        .resp-box button { margin-left: auto; background: rgba(255,255,255,0.1); border: none; width: 28px; height: 28px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; position: relative; z-index: 101; color: var(--text); font-size: 0.8rem; }
+        .resp-box button:hover { background: rgba(99,102,241,0.3); }
+        .btn-resp { margin-top: 0.75rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px dashed var(--border); border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; color: var(--text-dim); font-size: 0.85rem; transition: all 0.3s ease; position: relative; z-index: 100; }
+        .btn-resp:hover { border-color: var(--accent); color: var(--accent); background: rgba(99,102,241,0.1); }
+        .card-body { padding: 2rem; }
+        .info { margin-bottom: 1.5rem; }
+        .info-label { font-weight: 600; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .info-label i { color: var(--card-color); }
+        .info-text { color: var(--text); line-height: 1.6; margin-bottom: 0.5rem; }
+        .map-embed { width: 100%; min-height: 280px; border-radius: 12px; overflow: hidden; margin-top: 0.75rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%); border: 2px solid var(--border); position: relative; }
+        .map-embed iframe { width: 100%; height: 280px; border: 0; display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .prov { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-top: 1.5rem; position: relative; overflow: hidden; }
         .prov::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--card-color); }
-        .links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.8rem; }
-        .link { padding: 0.6rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.3s; }
-        .link:hover { background: var(--card-color); transform: translateY(-2px); }
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); }
-        .modal.show { display: flex; align-items: center; justify-content: center; }
-        .modal-box { background: #151935; border: 1px solid var(--border); padding: 2rem; border-radius: 20px; max-width: 500px; width: 90%; }
-        .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
-        .modal-title { font-size: 1.3rem; font-weight: 700; }
-        .close { background: rgba(255,255,255,0.1); border: none; width: 36px; height: 36px; border-radius: 8px; font-size: 1.3rem; cursor: pointer; color: var(--text-dim); }
+        .links { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+        .link { padding: 0.75rem 1.25rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); font-size: 0.9rem; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 500; position: relative; z-index: 10; cursor: pointer; }
+        .link:hover { background: var(--card-color); border-color: var(--card-color); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .link.whatsapp { background: #25D366; border-color: #25D366; }
+        .social-links { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+        .social { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; font-size: 1.2rem; position: relative; z-index: 10; cursor: pointer; }
+        .social:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+        .social.facebook { background: #1877f2; color: white; }
+        .social.twitter { background: #1da1f2; color: white; }
+        .social.youtube { background: #ff0000; color: white; }
+        .social.tiktok { background: #000000; color: white; }
+        .social.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
+        .social.linkedin { background: #0077b5; color: white; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+        .modal.show { display: flex; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; }
+        .modal-box { background: var(--bg); border: 1px solid var(--border); padding: 2.5rem; border-radius: 24px; max-width: 550px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 30px 90px rgba(0,0,0,0.5); animation: slideUp 0.4s ease; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
+        .modal-title { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+        .close { background: rgba(255,255,255,0.1); border: none; width: 40px; height: 40px; border-radius: 10px; font-size: 1.5rem; cursor: pointer; color: var(--text-dim); transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .close:hover { background: rgba(255,77,77,0.2); color: #ff4d4d; transform: rotate(90deg); }
         .form { margin-bottom: 1.25rem; }
-        .form label { display: block; margin-bottom: 0.6rem; font-weight: 600; font-size: 0.9rem; }
-        .form input { width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 0.95rem; }
-        .notif { position: fixed; top: 2rem; right: 2rem; background: linear-gradient(135deg, var(--success), #34d399); color: white; padding: 1rem 1.5rem; border-radius: 12px; display: none; align-items: center; gap: 0.75rem; z-index: 3000; font-weight: 600; font-size: 0.9rem; }
-        .notif.show { display: flex; animation: slide 0.3s; }
-        @keyframes slide { from { transform: translateX(400px); } to { transform: translateX(0); } }
+        .form label { display: block; margin-bottom: 0.75rem; font-weight: 600; color: var(--text); font-size: 0.9rem; }
+        .form input, .form select, .form textarea { width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 1rem; transition: all 0.3s ease; }
+        .form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.08); box-shadow: 0 0 0 4px rgba(99,102,241,0.1); }
+        .notif { position: fixed; top: 2rem; right: 2rem; background: linear-gradient(135deg, var(--success), #34d399); color: white; padding: 1.25rem 1.75rem; border-radius: 16px; box-shadow: 0 10px 40px rgba(16,185,129,0.4); display: none; align-items: center; gap: 1rem; z-index: 3000; animation: slideIn 0.4s ease; font-weight: 600; }
+        .notif.show { display: flex; }
+        @keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         .loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,14,39,0.95); display: flex; align-items: center; justify-content: center; z-index: 9999; flex-direction: column; gap: 1rem; }
         .loading.hide { display: none; }
         .spin { width: 50px; height: 50px; border: 4px solid rgba(99,102,241,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
+        @media (max-width: 768px) { h1 { font-size: 1.75rem; } .container { padding: 1rem; } .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -97,41 +117,79 @@
         <div class="stats">
             <div class="stat">
                 <div class="stat-val" id="total">0</div>
-                <div class="stat-label">Empresas</div>
+                <div class="stat-label">Empresas Registradas</div>
             </div>
             <div class="stat">
                 <div class="stat-val" id="provs">0</div>
-                <div class="stat-label">Proveedores</div>
+                <div class="stat-label">Proveedores Activos</div>
             </div>
             <div class="stat">
                 <div class="stat-val">CDMX</div>
-                <div class="stat-label">Ubicación</div>
+                <div class="stat-label">Ubicación Principal</div>
             </div>
         </div>
 
         <div class="controls">
             <div class="search">
                 <i class="fas fa-search"></i>
-                <input type="text" id="search" placeholder="Buscar...">
+                <input type="text" id="searchInput" placeholder="Buscar empresa, proveedor o ubicación...">
             </div>
-            <button class="btn" onclick="init()"><i class="fas fa-database"></i> Inicializar</button>
-            <button class="btn" onclick="exp()"><i class="fas fa-download"></i> Exportar</button>
+            <button class="btn" onclick="init()">
+                <i class="fas fa-database"></i> Inicializar Datos
+            </button>
+            <button class="btn" onclick="exp()">
+                <i class="fas fa-download"></i> Exportar
+            </button>
+            <button class="btn" onclick="openCampos()" style="background: linear-gradient(135deg, #8338ec 0%, #a78bfa 100%);">
+                <i class="fas fa-cog"></i> Campos Personalizados
+            </button>
         </div>
 
         <div class="grid" id="grid"></div>
     </div>
 
-    <div id="modal" class="modal">
+    <!-- Modal: Asignar Responsable -->
+    <div id="modalResp" class="modal">
         <div class="modal-box">
             <div class="modal-head">
-                <h3 class="modal-title">Asignar Responsable</h3>
-                <button class="close" onclick="closeM()">×</button>
+                <h3 class="modal-title"><i class="fas fa-user-tie"></i> Asignar Responsable</h3>
+                <button class="close" onclick="closeResp()">×</button>
             </div>
             <div class="form">
                 <label>Nombre del Responsable</label>
-                <input type="text" id="inp" placeholder="Ej: Juan Pérez">
+                <input type="text" id="inpResp" placeholder="Ej: Juan Pérez">
             </div>
-            <button class="btn" style="width: 100%;" onclick="save()"><i class="fas fa-save"></i> Guardar</button>
+            <button class="btn" style="width: 100%;" onclick="saveResp()">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: Campos Personalizados -->
+    <div id="modalCampos" class="modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h3 class="modal-title"><i class="fas fa-cog"></i> Gestionar Campos Personalizados</h3>
+                <button class="close" onclick="closeCampos()">×</button>
+            </div>
+            <div>
+                <p style="color: var(--text-dim); margin-bottom: 1.5rem;">
+                    Agrega campos adicionales personalizados y especifica si pertenecen a la Empresa o al Proveedor
+                </p>
+                
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+                    <input type="text" id="nuevoCampo" placeholder="Nombre del campo (ej: RFC, Cuenta Bancaria)" style="flex: 1; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 1rem;">
+                    <select id="tipoCampo" style="padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 1rem; min-width: 140px;">
+                        <option value="empresa">Empresa</option>
+                        <option value="proveedor">Proveedor</option>
+                    </select>
+                    <button class="btn" onclick="addCampo()">
+                        <i class="fas fa-plus"></i> Agregar
+                    </button>
+                </div>
+
+                <div id="listaCampos" style="max-height: 300px; overflow-y: auto;"></div>
+            </div>
         </div>
     </div>
 
@@ -141,6 +199,7 @@
     </div>
 
     <script>
+        // Configuración Firebase
         const cfg = {
             apiKey: "AIzaSyCJCDWaT6lJwB7nMHsOgVmwAK9USVOT6wE",
             authDomain: "directorio-empresas-2025.firebaseapp.com",
@@ -153,8 +212,10 @@
         firebase.initializeApp(cfg);
         const db = firebase.firestore();
         let data = [];
-        let curr = null;
+        let campos = [];
+        let currId = null;
 
+        // Cargar datos
         async function load() {
             try {
                 status('syncing', 'Cargando...');
@@ -162,7 +223,6 @@
                 data = [];
                 snap.forEach(doc => data.push({ id: doc.id, ...doc.data() }));
                 
-                // Si no hay datos, mostrar opción de inicializar
                 if (data.length === 0) {
                     document.getElementById('load').innerHTML = `
                         <div style="text-align: center; max-width: 600px;">
@@ -179,6 +239,11 @@
                     return;
                 }
                 
+                // Cargar campos personalizados
+                const cSnap = await db.collection('campos').get();
+                campos = [];
+                cSnap.forEach(doc => campos.push({ id: doc.id, ...doc.data() }));
+                
                 render();
                 stats();
                 status('synced', 'Sincronizado');
@@ -190,6 +255,7 @@
             }
         }
 
+        // Escuchar cambios en tiempo real
         db.collection('empresas').onSnapshot(snap => {
             snap.docChanges().forEach(ch => {
                 if (ch.type === 'modified') {
@@ -204,25 +270,56 @@
             });
         });
 
+        // Renderizar tarjetas
         function render() {
             const g = document.getElementById('grid');
             g.innerHTML = '';
-            data.forEach(e => g.appendChild(card(e)));
+            data.forEach(e => g.appendChild(createCard(e)));
         }
-
-        function card(e) {
+        // Crear tarjeta
+        function createCard(e) {
             const c = document.createElement('div');
             c.className = 'card';
             c.style.setProperty('--card-color', e.color || '#6366f1');
-            const dir = `${e.direccion?.calle || ''} ${e.direccion?.numero || ''}, ${e.direccion?.colonia || ''}`;
+            
+            const numInt = e.direccion?.numInt && e.direccion?.numInt !== 'N/A' ? `, Int. ${e.direccion.numInt}` : '';
+            const piso = e.direccion?.piso ? `, Piso ${e.direccion.piso}` : '';
+            const dir = `${e.direccion?.calle || ''} ${e.direccion?.numero || ''}${numInt}${piso}, ${e.direccion?.colonia || ''}, ${e.direccion?.alcaldia || ''}, ${e.direccion?.ciudad || ''} ${e.direccion?.cp || ''}`;
+            
             const resp = e.responsable ?
-                `<div class="resp-box"><i class="fas fa-user-tie"></i><span style="font-weight:600;">Resp:</span><span>${e.responsable}</span><button onclick="edit('${e.id}')"><i class="fas fa-edit"></i></button></div>` :
-                `<button class="btn-resp" onclick="edit('${e.id}')"><i class="fas fa-user-plus"></i> Asignar</button>`;
+                `<div class="resp-box">
+                    <i class="fas fa-user-tie" style="color: var(--accent);"></i>
+                    <span style="font-size: 0.9rem; color: var(--text); font-weight: 600;">Responsable:</span>
+                    <span style="font-size: 0.9rem; color: var(--accent-light);">${e.responsable}</span>
+                    <button onclick="editResp('${e.id}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>` :
+                `<button class="btn-resp" onclick="editResp('${e.id}')">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Asignar Responsable</span>
+                </button>`;
+            
+            const sociales = Object.entries(e.redes || {})
+                .filter(([k,v]) => v)
+                .map(([k,v]) => `<a href="${v}" target="_blank" rel="noopener noreferrer" class="social ${k}" title="${k}" style="cursor: pointer; pointer-events: auto;"><i class="fab fa-${k}" style="color: white; pointer-events: none;"></i></a>`)
+                .join('');
+            
+            const camposEmp = campos.filter(cp => cp.tipo === 'empresa').map(cp => {
+                const val = e.camposPersonalizados?.[cp.nombre] || '<span style="color: var(--text-dim); font-style: italic;">No especificado</span>';
+                return `<div class="info"><div class="info-label"><i class="fas fa-tag"></i> ${cp.nombre}</div><div class="info-text">${val}</div></div>`;
+            }).join('');
+            
+            const camposProv = campos.filter(cp => cp.tipo === 'proveedor').map(cp => {
+                const val = e.proveedor?.camposPersonalizados?.[cp.nombre] || '<span style="color: var(--text-dim); font-style: italic;">No especificado</span>';
+                return `<div class="info-text" style="margin-top: 0.5rem;"><strong>${cp.nombre}:</strong> ${val}</div>`;
+            }).join('');
+            
             c.innerHTML = `
                 <div class="card-head">
-                    <img src="${e.logo || ''}" class="logo-img">
+                    <img src="${e.logo || ''}" alt="${e.nombreComercial || ''}" class="logo-img">
                     <div class="card-text">
-                        <div class="card-title">${e.nombreComercial || ''}</div>
+                        <div class="card-title">${e.nombreComercial || 'Sin nombre'}</div>
                         <div class="card-sub">${e.razonSocial || ''}</div>
                         ${resp}
                     </div>
@@ -231,14 +328,58 @@
                     <div class="info">
                         <div class="info-label"><i class="fas fa-map-marker-alt"></i> Dirección</div>
                         <div class="info-text">${dir}</div>
+                        ${e.mapsUrl ? `<a href="${e.mapsUrl}" target="_blank" rel="noopener noreferrer" class="link" style="margin-top: 0.75rem; background: linear-gradient(135deg, #4285F4 0%, #34A853 100%); cursor: pointer; pointer-events: auto;"><i class="fas fa-map-marked-alt"></i> Ver en Google Maps</a>` : ''}
                     </div>
-                    <div class="prov">
-                        <div class="info-label"><i class="fas fa-building"></i> Proveedor</div>
-                        <div class="info-text"><strong>${e.proveedor?.nombre || ''}</strong></div>
-                        <div class="info-text">Contacto: ${e.proveedor?.contacto || 'N/A'}</div>
+                    
+                    ${e.mapsEmbed ? `
+                        <div class="info">
+                            <div class="info-label"><i class="fas fa-map"></i> Mapa de Ubicación</div>
+                            <div class="map-embed">
+                                <iframe 
+                                    src="${e.mapsEmbed}" 
+                                    width="100%" 
+                                    height="280" 
+                                    style="border: 0; display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                                    allowfullscreen="" 
+                                    loading="eager"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                                    title="Ubicación de ${e.nombreComercial}">
+                                </iframe>
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="info">
+                        <div class="info-label"><i class="fas fa-envelope"></i> Contacto Empresa</div>
                         <div class="links">
-                            ${e.proveedor?.email ? `<a href="mailto:${e.proveedor.email}" class="link"><i class="fas fa-envelope"></i> Email</a>` : ''}
-                            ${e.proveedor?.telefono ? `<a href="tel:${e.proveedor.telefono}" class="link"><i class="fas fa-phone"></i> Tel</a>` : ''}
+                            ${e.contacto?.email ? `<a href="mailto:${e.contacto.email}" class="link" style="pointer-events: auto;"><i class="fas fa-envelope"></i> ${e.contacto.email}</a>` : ''}
+                            ${e.contacto?.telefono ? `<a href="tel:${e.contacto.telefono}" class="link" style="pointer-events: auto;"><i class="fas fa-phone"></i> ${e.contacto.telefono}</a>` : ''}
+                            ${e.contacto?.dominio ? `<a href="${e.contacto.dominio}" target="_blank" rel="noopener noreferrer" class="link" style="pointer-events: auto;"><i class="fas fa-globe"></i> Sitio Web</a>` : ''}
+                        </div>
+                    </div>
+                    
+                    ${sociales ? `
+                        <div class="info">
+                            <div class="info-label"><i class="fas fa-share-alt"></i> Redes Sociales</div>
+                            <div class="social-links" style="pointer-events: auto;">${sociales}</div>
+                        </div>
+                    ` : ''}
+                    
+                    ${camposEmp}
+                    
+                    <div class="prov">
+                        <div class="info-label"><i class="fas fa-building"></i> Proveedor de Renta</div>
+                        <div class="info-text"><strong>${e.proveedor?.nombre || 'No especificado'}</strong></div>
+                        <div class="info-text">Contacto: ${e.proveedor?.contacto || 'N/A'}</div>
+                        ${camposProv}
+                        <div class="links">
+                            ${e.proveedor?.email ? `<a href="mailto:${e.proveedor.email}" class="link" style="pointer-events: auto;"><i class="fas fa-envelope"></i> ${e.proveedor.email}</a>` : ''}
+                            ${e.proveedor?.telefono ? `<a href="tel:${e.proveedor.telefono}" class="link" style="pointer-events: auto;"><i class="fas fa-phone"></i> ${e.proveedor.telefono}</a>` : ''}
+                            ${e.proveedor?.whatsapp ? 
+                                `<a href="https://wa.me/${e.proveedor.whatsapp}" target="_blank" rel="noopener noreferrer" class="link whatsapp" style="cursor: pointer; pointer-events: auto;">
+                                    <i class="fab fa-whatsapp"></i> ${e.proveedor.whatsapp}
+                                </a>` : ''}
                         </div>
                     </div>
                 </div>
@@ -246,24 +387,25 @@
             return c;
         }
 
-        function edit(id) {
-            curr = id;
+        // Responsable
+        function editResp(id) {
+            currId = id;
             const e = data.find(x => x.id === id);
-            document.getElementById('inp').value = e?.responsable || '';
-            document.getElementById('modal').classList.add('show');
+            document.getElementById('inpResp').value = e?.responsable || '';
+            document.getElementById('modalResp').classList.add('show');
         }
 
-        async function save() {
-            const r = document.getElementById('inp').value.trim();
+        async function saveResp() {
+            const r = document.getElementById('inpResp').value.trim();
             if (!r) return notif('⚠️ Ingresa un nombre');
             try {
                 status('syncing', 'Guardando...');
-                await db.collection('empresas').doc(curr).update({ responsable: r });
-                const e = data.find(x => x.id === curr);
+                await db.collection('empresas').doc(currId).update({ responsable: r });
+                const e = data.find(x => x.id === currId);
                 if (e) e.responsable = r;
                 render();
-                closeM();
-                notif('✓ Actualizado');
+                closeResp();
+                notif('✓ Responsable actualizado');
                 status('synced', 'Sincronizado');
             } catch (e) {
                 notif('❌ Error: ' + e.message);
@@ -271,17 +413,93 @@
             }
         }
 
-        function closeM() {
-            document.getElementById('modal').classList.remove('show');
-            curr = null;
+        function closeResp() {
+            document.getElementById('modalResp').classList.remove('show');
+            currId = null;
         }
 
+        // Campos personalizados
+        function openCampos() {
+            renderCampos();
+            document.getElementById('modalCampos').classList.add('show');
+        }
+
+        function closeCampos() {
+            document.getElementById('modalCampos').classList.remove('show');
+        }
+
+        function renderCampos() {
+            const list = document.getElementById('listaCampos');
+            if (campos.length === 0) {
+                list.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-dim);"><i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.3;"></i><p>No hay campos personalizados aún</p></div>';
+                return;
+            }
+            
+            list.innerHTML = campos.map((c, i) => {
+                const badge = c.tipo === 'empresa' 
+                    ? '<span style="background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; margin-left: 0.5rem;">EMPRESA</span>'
+                    : '<span style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; margin-left: 0.5rem;">PROVEEDOR</span>';
+                
+                return `
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-tag" style="color: var(--accent);"></i>
+                            <span style="font-weight: 600;">${c.nombre}</span>
+                            ${badge}
+                        </div>
+                        <button onclick="delCampo('${c.id}')" style="background: rgba(255,77,77,0.2); border: none; color: #ff4d4d; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,77,77,0.4)'" onmouseout="this.style.background='rgba(255,77,77,0.2)'">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function addCampo() {
+            const nombre = document.getElementById('nuevoCampo').value.trim();
+            const tipo = document.getElementById('tipoCampo').value;
+            
+            if (!nombre) return notif('⚠️ Ingresa un nombre');
+            if (campos.some(c => c.nombre === nombre)) return notif('⚠️ Este campo ya existe');
+            
+            try {
+                status('syncing', 'Guardando...');
+                const docRef = await db.collection('campos').add({ nombre, tipo });
+                campos.push({ id: docRef.id, nombre, tipo });
+                document.getElementById('nuevoCampo').value = '';
+                renderCampos();
+                notif('✓ Campo agregado');
+                status('synced', 'Sincronizado');
+            } catch (e) {
+                notif('❌ Error: ' + e.message);
+                status('synced', 'Error');
+            }
+        }
+
+        async function delCampo(id) {
+            if (!confirm('¿Eliminar este campo? Se perderán los datos asociados.')) return;
+            try {
+                status('syncing', 'Eliminando...');
+                await db.collection('campos').doc(id).delete();
+                campos = campos.filter(c => c.id !== id);
+                renderCampos();
+                render();
+                notif('✓ Campo eliminado');
+                status('synced', 'Sincronizado');
+            } catch (e) {
+                notif('❌ Error: ' + e.message);
+                status('synced', 'Error');
+            }
+        }
+
+        // Estadísticas
         function stats() {
             document.getElementById('total').textContent = data.length;
-            const p = new Set(data.map(e => e.proveedor?.nombre).filter(Boolean));
-            document.getElementById('provs').textContent = p.size;
+            const provs = new Set(data.map(e => e.proveedor?.nombre).filter(Boolean));
+            document.getElementById('provs').textContent = provs.size;
         }
 
+        // UI helpers
         function status(s, t) {
             document.getElementById('sync').className = 'sync ' + s;
             document.getElementById('syncTxt').textContent = t;
@@ -294,6 +512,7 @@
             setTimeout(() => n.classList.remove('show'), 3000);
         }
 
+        // Exportar
         function exp() {
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
@@ -301,37 +520,44 @@
             a.href = url;
             a.download = 'directorio_' + new Date().toISOString().split('T')[0] + '.json';
             a.click();
-            notif('✓ Exportado');
+            notif('✓ Datos exportados');
         }
 
+        // Inicializar datos
         async function init() {
             const emp = [
-                { nombreComercial: "Actividades Inteligentes", razonSocial: "Actividades Inteligentes DS SAPI de CV", responsable: "", logo: "https://thumbs2.imgbox.com/be/6f/X3aIUYqg_t.jpg", color: "#FF6B6B", direccion: { calle: "Jaime Balmes", numero: "11", colonia: "Polanco I Sección" }, proveedor: { nombre: "Sach Plaza Polanco", contacto: "Sergio Ramírez", email: "gerenciaplazapolanco@sach.mx", telefono: "55 4165 5959" } },
-                { nombreComercial: "Diseños y Aplicaciones T&C", razonSocial: "Diseños y Aplicaciones T&C S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c3/8b/RWtwVANG_t.jpg", color: "#4ECDC4", direccion: { calle: "Lago Alberto", numero: "442", colonia: "Anáhuac I Sección" }, proveedor: { nombre: "Sach Lago Alberto", contacto: "Gabriela Mancilla", email: "gerencialagoalberto@sach.mx", telefono: "55 6813 3053" } },
-                { nombreComercial: "Gala HR", razonSocial: "Gala Human Resources Services S.A.P.I. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c7/81/D5wnmrJk_t.jpg", color: "#FFD93D", direccion: { calle: "Mariano Escobedo", numero: "510", colonia: "Anzures" }, proveedor: { nombre: "FAST OFFICE", contacto: "Eduardo Barragan", email: "anzurez@fastoffice.mx", telefono: "55 1334 3833" } },
-                { nombreComercial: "Caivpe", razonSocial: "Grupo Caivpe S.A.de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c6/a7/T6BWl1zB_t.jpg", color: "#6BCF7F", direccion: { calle: "Monte Elbruz", numero: "124", colonia: "Lomas de Chapultepec" }, proveedor: { nombre: "Sach Polanco Lomas", contacto: "Abigaíl Herrera", email: "polancoadministracion@sach.mx", telefono: "55 4748 0707" } },
-                { nombreComercial: "BDU", razonSocial: "Human Values Tisdale Sixp S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/a5/db/28bD5e7C_t.jpg", color: "#A78BFA", direccion: { calle: "Lago Alberto", numero: "375", colonia: "Anáhuac I Sección" }, proveedor: { nombre: "Wework", contacto: "Fernanda García", email: "lagoalberto@wework.com", telefono: "Sin teléfono" } },
-                { nombreComercial: "Impegno4", razonSocial: "Impegno4 Consultoria S.A. de C.V", responsable: "", logo: "https://thumbs2.imgbox.com/85/23/Xqq7bcTo_t.jpg", color: "#F472B6", direccion: { calle: "Ejército Nacional", numero: "373", colonia: "Granada" }, proveedor: { nombre: "Proyecto 7 Coworking", contacto: "Karen", email: "polanco.cdmx@proyecto7.com.mx", telefono: "55 2915 0796" } },
-                { nombreComercial: "Piu Viaggio", razonSocial: "Pride Voyages S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/38/68/CRJwZakv_t.jpg", color: "#FB923C", direccion: { calle: "Mariano Escobedo", numero: "476", colonia: "Anzures" }, proveedor: { nombre: "Sach Mariano Escobedo", contacto: "No proporcionado", email: "gerenciamarianoescobedo@sach.mx", telefono: "55 9262 4240" } },
-                { nombreComercial: "Soluciones R&A", razonSocial: "Soluciones Administrativas R&A S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/d9/ba/6GiUUGXm_t.jpg", color: "#60A5FA", direccion: { calle: "Emerson", numero: "243", colonia: "Polanco V Sección" }, proveedor: { nombre: "Servicios AH Leal", contacto: "Alejandro Mota", email: "serviciosahleal@gmail.com", telefono: "55 5437 0804" } },
-                { nombreComercial: "Mesón Delta", razonSocial: "TU ORDEN LATAM", responsable: "", logo: "https://thumbs2.imgbox.com/db/af/CpyLY3SV_t.jpg", color: "#34D399", direccion: { calle: "Emerson", numero: "243", colonia: "Polanco V Sección" }, proveedor: { nombre: "Servicios AH Leal", contacto: "Alejandro Mota", email: "serviciosahleal@gmail.com", telefono: "55 5437 0804" } }
-            ];
+                { nombreComercial: "Actividades Inteligentes", razonSocial: "Actividades Inteligentes DS SAPI de CV", responsable: "", logo: "https://thumbs2.imgbox.com/be/6f/X3aIUYqg_t.jpg", color: "#FF6B6B", mapsUrl: "https://maps.app.goo.gl/HmHRhzYm6vqjiVUp8", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.399382034954!2d-99.2103008!3d19.4383402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2032162d3e6cf%3A0xed6ae0b41e8ebe51!2sSach%20Plaza%20Polanco!5e0!3m2!1ses!2smx!4v1764961745574!5m2!1ses!2smx", direccion: { calle: "Jaime Balmes", numero: "11", piso: "4", numInt: "Torre B Of. 402", colonia: "Polanco I Sección", alcaldia: "Miguel Hidalgo", cp: "11510", ciudad: "CDMX" }, proveedor: { nombre: "Sach Plaza Polanco", contacto: "Sergio Ramírez", email: "gerenciaplazapolanco@sach.mx", telefono: "55 4165 5959", whatsapp: "" }, contacto: { email: "contacto@inteligenteds.com", telefono: "", dominio: "https://inteligenteds.com/" }, redes: { facebook: "https://www.facebook.com/Actividades-Inteligentes-DS-101893858600101", linkedin: "https://www.linkedin.com/company/actividades-inteligentes/" }, camposPersonalizados: {} },
+                { nombreComercial: "Diseños y Aplicaciones T&C", razonSocial: "Diseños y Aplicaciones T&C S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c3/8b/RWtwVANG_t.jpg", color: "#4ECDC4", mapsUrl: "https://maps.app.goo.gl/NJ1qaHeuYEi6HWAY7", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26141.425176405515!2d-99.22558047896842!3d19.420317699708843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f95abba91625%3A0xc74045f09dce410a!2sSach%20Lago%20Alberto!5e0!3m2!1ses!2smx!4v1764962183476!5m2!1ses!2smx", direccion: { calle: "Lago Alberto", numero: "442", piso: "5", numInt: "503A", colonia: "Anáhuac I Sección", alcaldia: "Miguel Hidalgo", cp: "11320", ciudad: "CDMX" }, proveedor: { nombre: "Sach Lago Alberto", contacto: "Gabriela Mancilla", email: "gerencialagoalberto@sach.mx", telefono: "55 6813 3053", whatsapp: "" }, contacto: { email: "contacto@disenotc.com", telefono: "", dominio: "https://disenotc.com/" }, redes: { facebook: "https://www.facebook.com/share/1FzdSfTALa/?mibextid=wwXIfr", twitter: "https://x.com/disenostyc?s=21", youtube: "https://youtube.com/@disenosyaplicacionestc5136?si=ug3KoMyH3Gl89onZ", tiktok: "https://www.tiktok.com/@disenotc?_r=1&_t=ZS-91xbKQ78Isy", instagram: "https://www.instagram.com/disenostyc_mx?igsh=Z3RiZDJkdTVkbnN5" }, camposPersonalizados: {} },
+                { nombreComercial: "Gala HR", razonSocial: "Gala Human Resources Services S.A.P.I. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c7/81/D5wnmrJk_t.jpg", color: "#FFD93D", mapsUrl: "https://maps.app.goo.gl/ToaaBUHNmdW4yFPZ9", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5490158006473!2d-99.18361152417192!3d19.431882240702723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9e141972583%3A0x771e12ec96eb1b01!2sFast%20Office%20Masaryk!5e0!3m2!1ses!2smx!4v1764961851513!5m2!1ses!2smx", direccion: { calle: "Mariano Escobedo", numero: "510", piso: "", numInt: "Penthouse 2Ñ", colonia: "Anzures", alcaldia: "Miguel Hidalgo", cp: "11590", ciudad: "CDMX" }, proveedor: { nombre: "FAST OFFICE BIENES RAÍCES", contacto: "Eduardo Barragan Camacho", email: "anzurez@fastoffice.mx", telefono: "55 1334 3833", whatsapp: "" }, contacto: { email: "contacto@galahr.com", telefono: "55 7589 8052", dominio: "https://galahr.com/" }, redes: { facebook: "https://www.facebook.com/GalaHumanResources/", twitter: "https://twitter.com/HumanGala", youtube: "https://www.youtube.com/channel/UC_LgnMxLRuSx4Khuq_nx4iQ", tiktok: "https://www.tiktok.com/@galahrmx?_r=1&_t=ZS-91xbgEgbHKq", instagram: "https://www.instagram.com/gala_humanresources/", linkedin: "https://www.linkedin.com/company/galahrmx/posts/?feedView=all" }, camposPersonalizados: {} },
+                { nombreComercial: "Caivpe", razonSocial: "Grupo Caivpe S.A.de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c6/a7/T6BWl1zB_t.jpg", color: "#6BCF7F", mapsUrl: "https://maps.app.goo.gl/cxupqqBjZ6A2t9276", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7263.358258906885!2d-99.20851779310507!3d19.428972577056896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2021d89c400bb%3A0x74f47d38f8bcf12a!2sSach%20Polanco%20Lomas!5e0!3m2!1ses!2smx!4v1764962147660!5m2!1ses!2smx", direccion: { calle: "Monte Elbruz", numero: "124", piso: "2", numInt: "212B", colonia: "Lomas de Chapultepec III Sección", alcaldia: "Miguel Hidalgo", cp: "11000", ciudad: "CDMX" }, proveedor: { nombre: "Sach Polanco Lomas", contacto: "Abigaíl Herrera", email: "polancoadministracion@sach.mx", telefono: "55 4748 0707", whatsapp: "" }, contacto: { email: "contacto@caivpe.com", telefono: "", dominio: "https://caivpe.com/" }, redes: { facebook: "https://www.facebook.com/grupocaivpe", twitter: "https://twitter.com/caivpe", youtube: "https://www.youtube.com/channel/UC3UfcJRoZvVuKXyL-tr6gig", instagram: "https://www.instagram.com/caivpemx/", linkedin: "https://www.linkedin.com/company/grupo-caivpe/" }, camposPersonalizados: {} },
+                { nombreComercial: "BDU", razonSocial: "Human Values Tisdale Sixp, S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/a5/db/28bD5e7C_t.jpg", color: "#A78BFA", mapsUrl: "https://maps.app.goo.gl/DkiLFNY8ho8ev1sc8", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.390658268554!2d-99.18289752417174!3d19.438716640484365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9eb5b43f4e7%3A0xede37e61734b429a!2sWeWork%20Espacio%20de%20Oficinas%20%26%20Coworking!5e0!3m2!1ses!2smx!4v1764961811864!5m2!1ses!2smx", direccion: { calle: "Lago Alberto", numero: "375", piso: "20", numInt: "Of. 20-104", colonia: "Anáhuac I Sección", alcaldia: "Miguel Hidalgo", cp: "11320", ciudad: "CDMX" }, proveedor: { nombre: "Wework", contacto: "Fernanda García", email: "lagoalberto@wework.com", telefono: "Sin teléfono (solo ticket/correo)", whatsapp: "" }, contacto: { email: "info@bdunity.com", telefono: "55 5341 1159", dominio: "https://bdunity.com/" }, redes: { facebook: "https://www.facebook.com/HumanValuesT/", twitter: "https://twitter.com/HumanValuesMx", youtube: "https://www.youtube.com/channel/UC_vk3235o1Hr-XtqdoNHwyQ/featured", tiktok: "https://www.tiktok.com/@bdunity?_r=1&_t=ZS-91xbqf1lj9k", instagram: "https://www.instagram.com/human_values.mx/", linkedin: "https://www.linkedin.com/company/humanvalues/about/" }, camposPersonalizados: {} },
+                { nombreComercial: "Impegno4", razonSocial: "Impegno4 Consultoria y Servicios Especializados S.A. de C.V", responsable: "", logo: "https://thumbs2.imgbox.com/85/23/Xqq7bcTo_t.jpg", color: "#F472B6", mapsUrl: "https://maps.app.goo.gl/8xkckHNp56DW2y4x7", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4056821031103!2d-99.18871622417183!3d19.438068340505012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d201ffb89e1161%3A0x9f1dcf3303c45a23!2sProyecto%207%20Coworking%20-%20Sede%20Polanco%20-%20CDMX!5e0!3m2!1ses!2smx!4v1764962014961!5m2!1ses!2smx", direccion: { calle: "Ejército Nacional", numero: "373", piso: "4", numInt: "Ofs. 401 y 402", colonia: "Granada", alcaldia: "Miguel Hidalgo", cp: "11520", ciudad: "CDMX" }, proveedor: { nombre: "Proyecto 7 Coworking", contacto: "Karen", email: "polanco.cdmx@proyecto7.com.mx", telefono: "55 2915 0796", whatsapp: "" }, contacto: { email: "contacto@impegno4.com", telefono: "", dominio: "https://impegno4.com/" }, redes: { facebook: "https://www.facebook.com/Impegno4-301940817386225/", twitter: "https://x.com/impegno41?s=11", youtube: "https://www.youtube.com/channel/UCeyJfYdZfdqzdcnKGkdwz1w?view_as=subscriber", instagram: "https://www.instagram.com/impegno.4/", linkedin: "https://www.linkedin.com/company/impegno4/" }, camposPersonalizados: {} },
+                { nombreComercial: "Piu Viaggio", razonSocial: "Pride Voyages S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/38/68/CRJwZakv_t.jpg", color: "#FB923C", mapsUrl: "https://maps.app.goo.gl/PURScQNVnNsKoahFA", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.523005779797!2d-99.18386372417186!3d19.4330049406668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9293194ed67%3A0xcbca0406ac451b43!2sSach%20Mariano%20Escobedo!5e0!3m2!1ses!2smx!4v1764961950778!5m2!1ses!2smx", direccion: { calle: "Calz. Mariano Escobedo", numero: "476", piso: "12", numInt: "Ofna. 1200B", colonia: "Anzures", alcaldia: "Miguel Hidalgo", cp: "11590", ciudad: "CDMX" }, proveedor: { nombre: "Sach Mariano Escobedo", contacto: "No proporcionado", email: "gerenciamarianoescobedo@sach.mx", telefono: "55 9262 4240", whatsapp: "" }, contacto: { email: "contacto@piuviaggio.com", telefono: "", dominio: "https://piuviaggio.com/" }, redes: { facebook: "https://www.facebook.com/PiuViaggio/", twitter: "https://twitter.com/PiuViaggio", youtube: "https://www.youtube.com/channel/UCVCA0p94pio9cxRzur6zCsg", instagram: "https://www.instagram.com/piu.viaggio/?hl=es-la" }, camposPersonalizados: {} },
+                { nombreComercial: "Soluciones Administrativas R&A", razonSocial: "Soluciones Administrativas R&A S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/d9/ba/6GiUUGXm_t.jpg", color: "#60A5FA", mapsUrl: "https://maps.app.goo.gl/Hi2kwbCZLphvwvMZ8", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.49936329625!2d-99.19383821499083!3d19.43402539384204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8aa64410f0d%3A0x347da0b76853dc39!2sEmerson%20243%2C%20Polanco%2C%20Polanco%20V%20Secc%2C%20Miguel%20Hidalgo%2C%2011560%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1764961898612!5m2!1ses!2smx", direccion: { calle: "Emerson", numero: "243", piso: "3", numInt: "N/A", colonia: "Polanco V Sección", alcaldia: "Miguel Hidalgo", cp: "11560", ciudad: "CDMX" }, proveedor: { nombre: "Servicios AH Leal", contacto: "Alejandro Mota", email: "serviciosahleal@gmail.com", telefono: "55 5437 0804", whatsapp: "5554370804" }, contacto: { email: "contacto@adminra.com", telefono: "", dominio: "https://adminra.com/" }, redes: {}, camposPersonalizados: {} },
+                { nombreComercial: "Mesón Delta", razonSocial: "TU ORDEN LATAM", responsable: "", logo: "https://thumbs2.imgbox.com/db/af/CpyLY3SV_t.jpg", color: "#34D399", mapsUrl: "https://maps.app.goo.gl/Hi2kwbCZLphvwvMZ8", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.49936329625!2d-99.19383821499083!3d19.43402539384204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8aa64410f0d%3A0x347da0b76853dc39!2sEmerson%20243%2C%20Polanco%2C%20Polanco%20V%20Secc%2C%20Miguel%20Hidalgo%2C%2011560%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1764961898612!5m2!1ses!2smx", direccion: { calle: "Emerson", numero: "243", piso: "3", numInt: "N/A", colonia: "Polanco V Sección", alcaldia: "Miguel Hidalgo", cp: "11560", ciudad: "CDMX" }, proveedor: { nombre: "Servicios AH Leal", contacto: "Alejandro Mota", email: "serviciosahleal@gmail.com", telefono: "55 5437 0804", whatsapp: "5554370804" }, contacto: { email: "contacto@mesondelta.com", telefono: "", dominio: "https://mesondelta.com/" }, redes: { facebook: "https://www.facebook.com/share/1DS52DbbWa/?mibextid=wwXIfr", youtube: "https://www.youtube.com/@mesondelta", tiktok: "https://www.tiktok.com/@mesondelta?_t=ZS-90KytR7YNb0&_r=1", instagram: "https://www.instagram.com/mesondelta_/?igsh=MWhuaDcxajc0aG92Mg%3D%3D#", linkedin: "linkedin.com/company/meson-delta/" }, camposPersonalizados: {} }
+];
             try {
-                document.getElementById('load').innerHTML = `
-                    <div class="spin"></div>
-                    <div style="color: var(--text); font-size: 1.1rem; font-weight: 600;">Cargando 9 empresas a Firebase...</div>
-                `;
-                status('syncing', 'Inicializando...');
-                for (const e of emp) await db.collection('empresas').add(e);
-                await load();
-                notif('✓ 9 empresas cargadas exitosamente');
-            } catch (e) {
-                notif('❌ Error: ' + e.message);
-                status('synced', 'Error');
-            }
+            document.getElementById('load').innerHTML = `<div class="spin"></div><div style="color: var(--text); font-size: 1.1rem; font-weight: 600;">Cargando 9 empresas a Firebase...</div>`;
+            status('syncing', 'Inicializando...');
+            for (const e of emp) await db.collection('empresas').add(e);
+            await load();
+            notif('✓ 9 empresas cargadas exitosamente');
+        } catch (e) {
+            notif('❌ Error: ' + e.message);
+            status('synced', 'Error');
         }
+    }
 
-        load();
-    </script>
+    // Cerrar modales al click fuera
+    document.getElementById('modalResp').addEventListener('click', function(e) {
+        if (e.target === this) closeResp();
+    });
+    document.getElementById('modalCampos').addEventListener('click', function(e) {
+        if (e.target === this) closeCampos();
+    });
+
+    // Iniciar
+    load();
+</script>
 </body>
 </html>
