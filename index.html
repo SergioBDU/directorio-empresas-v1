@@ -4,202 +4,313 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Directorio Empresas v1.1 - Firebase</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         :root {
-            --bg-primary: #0a0e27; --bg-secondary: #151935; --bg-card: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff; --text-secondary: #a0a8c8; --accent: #6366f1;
-            --accent-light: #818cf8; --success: #10b981; --border: rgba(255, 255, 255, 0.1);
+            --bg: #0a0e27; --card: rgba(255,255,255,0.05); --text: #fff;
+            --text-dim: #a0a8c8; --accent: #6366f1; --success: #10b981; --border: rgba(255,255,255,0.1);
         }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
-            color: var(--text-primary); min-height: 100vh; overflow-x: hidden;
-        }
-        
-        .header {
-            position: relative; padding: 2rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1;
-        }
-        
-        .header-content {
-            max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 2rem;
-        }
-        
-        h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #a0a8c8 100%);
-             -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .subtitle { color: var(--text-secondary); font-size: 0.9rem; }
-        
-        .sync-status {
-            display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.05); border-radius: 10px; font-size: 0.9rem; margin-left: auto;
-        }
-        
-        .sync-status.syncing { color: #fbbf24; }
-        .sync-status.synced { color: var(--success); }
-        
-        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
-        
-        .loading {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 14, 39, 0.95); display: flex; align-items: center;
-            justify-content: center; z-index: 9999; flex-direction: column; gap: 1rem;
-        }
-        
-        .loading.hidden { display: none; }
-        
-        .spinner {
-            width: 50px; height: 50px; border: 4px solid rgba(99, 102, 241, 0.2);
-            border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite;
-        }
-        
+        body { font-family: Inter, sans-serif; background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%); color: var(--text); min-height: 100vh; }
+        .header { padding: 2rem; background: rgba(99,102,241,0.1); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+        .header-content { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 2rem; }
+        .logo { width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent), #818cf8); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        h1 { font-size: 2rem; font-weight: 800; }
+        .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-top: 0.25rem; }
+        .sync { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border-radius: 10px; font-size: 0.85rem; margin-left: auto; }
+        .sync.syncing { color: #fbbf24; } .sync.synced { color: var(--success); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: all 0.3s; }
+        .stat:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .stat-val { font-size: 2.5rem; font-weight: 800; color: var(--accent); }
+        .stat-label { color: var(--text-dim); margin-top: 0.5rem; font-size: 0.9rem; }
+        .controls { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+        .search { flex: 1; min-width: 200px; position: relative; }
+        .search input { width: 100%; padding: 0.75rem 0.75rem 0.75rem 2.5rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 0.95rem; }
+        .search i { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
+        .btn { padding: 0.75rem 1.25rem; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s; background: linear-gradient(135deg, var(--accent), #818cf8); color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99,102,241,0.4); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: all 0.3s; position: relative; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--card-color, var(--accent)); }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .card-head { padding: 1.5rem; display: flex; align-items: center; gap: 1.25rem; border-bottom: 1px solid var(--border); }
+        .logo-img { width: 70px; height: 70px; object-fit: contain; border-radius: 12px; background: rgba(255,255,255,0.95); padding: 0.6rem; }
+        .card-text { flex: 1; }
+        .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .card-sub { color: var(--text-dim); font-size: 0.85rem; }
+        .resp-box { margin-top: 0.6rem; display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.8rem; background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.3); border-radius: 8px; font-size: 0.8rem; }
+        .resp-box button { margin-left: auto; background: rgba(255,255,255,0.1); border: none; width: 24px; height: 24px; border-radius: 6px; cursor: pointer; color: var(--text); font-size: 0.75rem; }
+        .btn-resp { margin-top: 0.6rem; padding: 0.4rem 0.8rem; background: rgba(255,255,255,0.05); border: 1px dashed var(--border); border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; color: var(--text-dim); font-size: 0.8rem; }
+        .card-body { padding: 1.5rem; }
+        .info { margin-bottom: 1.25rem; }
+        .info-label { font-weight: 600; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
+        .info-text { color: var(--text); line-height: 1.5; font-size: 0.9rem; }
+        .prov { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-top: 1.25rem; position: relative; }
+        .prov::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--card-color); }
+        .links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.8rem; }
+        .link { padding: 0.6rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.3s; }
+        .link:hover { background: var(--card-color); transform: translateY(-2px); }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); }
+        .modal.show { display: flex; align-items: center; justify-content: center; }
+        .modal-box { background: #151935; border: 1px solid var(--border); padding: 2rem; border-radius: 20px; max-width: 500px; width: 90%; }
+        .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
+        .modal-title { font-size: 1.3rem; font-weight: 700; }
+        .close { background: rgba(255,255,255,0.1); border: none; width: 36px; height: 36px; border-radius: 8px; font-size: 1.3rem; cursor: pointer; color: var(--text-dim); }
+        .form { margin-bottom: 1.25rem; }
+        .form label { display: block; margin-bottom: 0.6rem; font-weight: 600; font-size: 0.9rem; }
+        .form input { width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 0.95rem; }
+        .notif { position: fixed; top: 2rem; right: 2rem; background: linear-gradient(135deg, var(--success), #34d399); color: white; padding: 1rem 1.5rem; border-radius: 12px; display: none; align-items: center; gap: 0.75rem; z-index: 3000; font-weight: 600; font-size: 0.9rem; }
+        .notif.show { display: flex; animation: slide 0.3s; }
+        @keyframes slide { from { transform: translateX(400px); } to { transform: translateX(0); } }
+        .loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,14,39,0.95); display: flex; align-items: center; justify-content: center; z-index: 9999; flex-direction: column; gap: 1rem; }
+        .loading.hide { display: none; }
+        .spin { width: 50px; height: 50px; border: 4px solid rgba(99,102,241,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        
-        .notification {
-            position: fixed; top: 2rem; right: 2rem;
-            background: linear-gradient(135deg, var(--success) 0%, #34d399 100%);
-            color: white; padding: 1rem 1.5rem; border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4); display: none;
-            align-items: center; gap: 0.75rem; z-index: 3000; font-weight: 600;
-        }
-        
-        .notification.show { display: flex; animation: slideIn 0.3s ease; }
-        
-        @keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
 <body>
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
-        <div style="color: var(--text-primary); font-size: 1.2rem; font-weight: 600;">
-            Conectando con Firebase...
-        </div>
+    <div class="loading" id="load">
+        <div class="spin"></div>
+        <div style="color: var(--text); font-size: 1.1rem; font-weight: 600;">Cargando desde Firebase...</div>
     </div>
 
     <div class="header">
         <div class="header-content">
+            <div class="logo"><i class="fas fa-building"></i></div>
             <div>
-                <h1>🔥 Directorio Empresas v1.1</h1>
-                <p class="subtitle">Sistema Colaborativo en la Nube</p>
+                <h1>Directorio Empresas v1.1</h1>
+                <p class="subtitle">Sistema Colaborativo en la Nube 🔥</p>
             </div>
-            <div class="sync-status synced" id="syncStatus">
+            <div class="sync synced" id="sync">
                 <i class="fas fa-cloud-upload-alt"></i>
-                <span id="syncText">Sincronizado</span>
+                <span id="syncTxt">Sincronizado</span>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div style="padding: 3rem; text-align: center;">
-            <div style="font-size: 4rem; margin-bottom: 1rem;">🚀</div>
-            <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--text-primary);">
-                ¡Firebase Conectado Exitosamente!
-            </h2>
-            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">
-                Tu sistema está listo para sincronización en tiempo real. Ahora voy a migrar todos tus datos desde localStorage a Firebase.
-            </p>
-            <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid var(--accent); border-radius: 12px; padding: 1.5rem; max-width: 700px; margin: 0 auto;">
-                <h3 style="color: var(--accent); margin-bottom: 1rem;">✅ Próximos pasos:</h3>
-                <ol style="text-align: left; color: var(--text-secondary); line-height: 2;">
-                    <li>Inicializar la base de datos con tus 9 empresas</li>
-                    <li>Configurar listeners en tiempo real</li>
-                    <li>Probar la sincronización entre dispositivos</li>
-                    <li>Agregar autenticación (opcional)</li>
-                </ol>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-val" id="total">0</div>
+                <div class="stat-label">Empresas</div>
             </div>
+            <div class="stat">
+                <div class="stat-val" id="provs">0</div>
+                <div class="stat-label">Proveedores</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">CDMX</div>
+                <div class="stat-label">Ubicación</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Buscar...">
+            </div>
+            <button class="btn" onclick="init()"><i class="fas fa-database"></i> Inicializar</button>
+            <button class="btn" onclick="exp()"><i class="fas fa-download"></i> Exportar</button>
+        </div>
+
+        <div class="grid" id="grid"></div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h3 class="modal-title">Asignar Responsable</h3>
+                <button class="close" onclick="closeM()">×</button>
+            </div>
+            <div class="form">
+                <label>Nombre del Responsable</label>
+                <input type="text" id="inp" placeholder="Ej: Juan Pérez">
+            </div>
+            <button class="btn" style="width: 100%;" onclick="save()"><i class="fas fa-save"></i> Guardar</button>
         </div>
     </div>
 
-    <div class="notification" id="notification">
+    <div class="notif" id="notif">
         <i class="fas fa-check-circle"></i>
-        <span id="notificationText"></span>
+        <span id="notifTxt"></span>
     </div>
 
     <script>
-        // Configuración de Firebase
-        const firebaseConfig = {
+        const cfg = {
             apiKey: "AIzaSyCJCDWaT6lJwB7nMHsOgVmwAK9USVOT6wE",
             authDomain: "directorio-empresas-2025.firebaseapp.com",
             projectId: "directorio-empresas-2025",
             storageBucket: "directorio-empresas-2025.firebasestorage.app",
             messagingSenderId: "193370046732",
-            appId: "1:193370046732:web:ad0f3bb81f810502b68929",
-            measurementId: "G-7FQC99BP0V"
+            appId: "1:193370046732:web:ad0f3bb81f810502b68929"
         };
 
-        // Inicializar Firebase
-        let db;
-        
-        try {
-            firebase.initializeApp(firebaseConfig);
-            db = firebase.firestore();
-            
-            // Probar conexión
-            db.collection('test').doc('connection').set({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                message: 'Firebase conectado correctamente'
-            }).then(() => {
-                console.log('✅ Firebase conectado exitosamente');
-                updateSyncStatus('synced', 'Conectado a Firebase');
-                showNotification('✅ Sistema conectado a Firebase');
-                setTimeout(() => {
-                    document.getElementById('loading').classList.add('hidden');
-                }, 1500);
-            }).catch((error) => {
-                console.error('Error al conectar con Firebase:', error);
-                updateSyncStatus('error', 'Error de conexión');
-                showNotification('❌ Error al conectar: ' + error.message);
-            });
-            
-        } catch (error) {
-            console.error('Error al inicializar Firebase:', error);
-            alert('Error al inicializar Firebase: ' + error.message);
-        }
+        firebase.initializeApp(cfg);
+        const db = firebase.firestore();
+        let data = [];
+        let curr = null;
 
-        function updateSyncStatus(status, text) {
-            const statusEl = document.getElementById('syncStatus');
-            const textEl = document.getElementById('syncText');
-            
-            statusEl.className = 'sync-status ' + status;
-            textEl.textContent = text;
-        }
-
-        function showNotification(text) {
-            const notification = document.getElementById('notification');
-            const notificationText = document.getElementById('notificationText');
-            
-            notificationText.textContent = text;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        // TEST: Leer datos de prueba
-        setTimeout(() => {
-            if (db) {
-                db.collection('test').doc('connection').get()
-                    .then((doc) => {
-                        if (doc.exists) {
-                            console.log('📄 Datos de prueba:', doc.data());
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Error al leer datos:', error);
-                    });
+        async function load() {
+            try {
+                status('syncing', 'Cargando...');
+                const snap = await db.collection('empresas').orderBy('nombreComercial').get();
+                data = [];
+                snap.forEach(doc => data.push({ id: doc.id, ...doc.data() }));
+                render();
+                stats();
+                status('synced', 'Sincronizado');
+                document.getElementById('load').classList.add('hide');
+            } catch (e) {
+                console.error(e);
+                status('syncing', 'Error');
+                notif('Error: ' + e.message);
             }
-        }, 2000);
+        }
+
+        db.collection('empresas').onSnapshot(snap => {
+            snap.docChanges().forEach(ch => {
+                if (ch.type === 'modified') {
+                    const d = { id: ch.doc.id, ...ch.doc.data() };
+                    const i = data.findIndex(e => e.id === ch.doc.id);
+                    if (i !== -1) {
+                        data[i] = d;
+                        render();
+                        stats();
+                    }
+                }
+            });
+        });
+
+        function render() {
+            const g = document.getElementById('grid');
+            g.innerHTML = '';
+            data.forEach(e => g.appendChild(card(e)));
+        }
+
+        function card(e) {
+            const c = document.createElement('div');
+            c.className = 'card';
+            c.style.setProperty('--card-color', e.color || '#6366f1');
+            const dir = `${e.direccion?.calle || ''} ${e.direccion?.numero || ''}, ${e.direccion?.colonia || ''}`;
+            const resp = e.responsable ?
+                `<div class="resp-box"><i class="fas fa-user-tie"></i><span style="font-weight:600;">Resp:</span><span>${e.responsable}</span><button onclick="edit('${e.id}')"><i class="fas fa-edit"></i></button></div>` :
+                `<button class="btn-resp" onclick="edit('${e.id}')"><i class="fas fa-user-plus"></i> Asignar</button>`;
+            c.innerHTML = `
+                <div class="card-head">
+                    <img src="${e.logo || ''}" class="logo-img">
+                    <div class="card-text">
+                        <div class="card-title">${e.nombreComercial || ''}</div>
+                        <div class="card-sub">${e.razonSocial || ''}</div>
+                        ${resp}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="info">
+                        <div class="info-label"><i class="fas fa-map-marker-alt"></i> Dirección</div>
+                        <div class="info-text">${dir}</div>
+                    </div>
+                    <div class="prov">
+                        <div class="info-label"><i class="fas fa-building"></i> Proveedor</div>
+                        <div class="info-text"><strong>${e.proveedor?.nombre || ''}</strong></div>
+                        <div class="info-text">Contacto: ${e.proveedor?.contacto || 'N/A'}</div>
+                        <div class="links">
+                            ${e.proveedor?.email ? `<a href="mailto:${e.proveedor.email}" class="link"><i class="fas fa-envelope"></i> Email</a>` : ''}
+                            ${e.proveedor?.telefono ? `<a href="tel:${e.proveedor.telefono}" class="link"><i class="fas fa-phone"></i> Tel</a>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            return c;
+        }
+
+        function edit(id) {
+            curr = id;
+            const e = data.find(x => x.id === id);
+            document.getElementById('inp').value = e?.responsable || '';
+            document.getElementById('modal').classList.add('show');
+        }
+
+        async function save() {
+            const r = document.getElementById('inp').value.trim();
+            if (!r) return notif('⚠️ Ingresa un nombre');
+            try {
+                status('syncing', 'Guardando...');
+                await db.collection('empresas').doc(curr).update({ responsable: r });
+                const e = data.find(x => x.id === curr);
+                if (e) e.responsable = r;
+                render();
+                closeM();
+                notif('✓ Actualizado');
+                status('synced', 'Sincronizado');
+            } catch (e) {
+                notif('❌ Error: ' + e.message);
+                status('synced', 'Error');
+            }
+        }
+
+        function closeM() {
+            document.getElementById('modal').classList.remove('show');
+            curr = null;
+        }
+
+        function stats() {
+            document.getElementById('total').textContent = data.length;
+            const p = new Set(data.map(e => e.proveedor?.nombre).filter(Boolean));
+            document.getElementById('provs').textContent = p.size;
+        }
+
+        function status(s, t) {
+            document.getElementById('sync').className = 'sync ' + s;
+            document.getElementById('syncTxt').textContent = t;
+        }
+
+        function notif(t) {
+            const n = document.getElementById('notif');
+            document.getElementById('notifTxt').textContent = t;
+            n.classList.add('show');
+            setTimeout(() => n.classList.remove('show'), 3000);
+        }
+
+        function exp() {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'directorio_' + new Date().toISOString().split('T')[0] + '.json';
+            a.click();
+            notif('✓ Exportado');
+        }
+
+        async function init() {
+            if (!confirm('¿Cargar 9 empresas iniciales en Firebase?')) return;
+            const emp = [
+                { nombreComercial: "Actividades Inteligentes", razonSocial: "Actividades Inteligentes DS SAPI de CV", responsable: "", logo: "https://thumbs2.imgbox.com/be/6f/X3aIUYqg_t.jpg", color: "#FF6B6B", direccion: { calle: "Jaime Balmes", numero: "11", colonia: "Polanco I Sección" }, proveedor: { nombre: "Sach Plaza Polanco", contacto: "Sergio Ramírez", email: "gerenciaplazapolanco@sach.mx", telefono: "55 4165 5959" } },
+                { nombreComercial: "Diseños y Aplicaciones T&C", razonSocial: "Diseños y Aplicaciones T&C S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c3/8b/RWtwVANG_t.jpg", color: "#4ECDC4", direccion: { calle: "Lago Alberto", numero: "442", colonia: "Anáhuac I Sección" }, proveedor: { nombre: "Sach Lago Alberto", contacto: "Gabriela Mancilla", email: "gerencialagoalberto@sach.mx", telefono: "55 6813 3053" } },
+                { nombreComercial: "Gala HR", razonSocial: "Gala Human Resources Services S.A.P.I. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c7/81/D5wnmrJk_t.jpg", color: "#FFD93D", direccion: { calle: "Mariano Escobedo", numero: "510", colonia: "Anzures" }, proveedor: { nombre: "FAST OFFICE", contacto: "Eduardo Barragan", email: "anzurez@fastoffice.mx", telefono: "55 1334 3833" } },
+                { nombreComercial: "Caivpe", razonSocial: "Grupo Caivpe S.A.de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c6/a7/T6BWl1zB_t.jpg", color: "#6BCF7F", direccion: { calle: "Monte Elbruz", numero: "124", colonia: "Lomas de Chapultepec" }, proveedor: { nombre: "Sach Polanco Lomas", contacto: "Abigaíl Herrera", email: "polancoadministracion@sach.mx", telefono: "55 4748 0707" } },
+                { nombreComercial: "BDU", razonSocial: "Human Values Tisdale Sixp S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/a5/db/28bD5e7C_t.jpg", color: "#A78BFA", direccion: { calle: "Lago Alberto", numero: "375", colonia: "Anáhuac I Sección" }, proveedor: { nombre: "Wework", contacto: "Fernanda García", email: "lagoalberto@wework.com", telefono: "Sin teléfono" } },
+                { nombreComercial: "Impegno4", razonSocial: "Impegno4 Consultoria S.A. de C.V", responsable: "", logo: "https://thumbs2.imgbox.com/85/23/Xqq7bcTo_t.jpg", color: "#F472B6", direccion: { calle: "Ejército Nacional", numero: "373", colonia: "Granada" }, proveedor: { nombre: "Proyecto 7 Coworking", contacto: "Karen", email: "polanco.cdmx@proyecto7.com.mx", telefono: "55 2915 0796" } },
+                { nombreComercial: "Piu Viaggio", razonSocial: "Pride Voyages S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/38/68/CRJwZakv_t.jpg", color: "#FB923C", direccion: { calle: "Mariano Escobedo", numero: "476", colonia: "Anzures" }, proveedor: { nombre: "Sach Mariano Escobedo", contacto: "No proporcionado", email: "gerenciamarianoescobedo@sach.mx", telefono: "55 9262 4240" } },
+                { nombreComercial: "Soluciones R&A", razonSocial: "Soluciones Administrativas R&A S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/d9/ba/6GiUUGXm_t.jpg", color: "#60A5FA", direccion: { calle: "Emerson", numero: "243", colonia: "Polanco V Sección" }, proveedor: { nombre: "Servicios AH Leal", contacto: "Alejandro Mota", email: "serviciosahleal@gmail.com", telefono: "55 5437 0804" } },
+                { nombreComercial: "Mesón Delta", razonSocial: "TU ORDEN LATAM", responsable: "", logo: "https://thumbs2.imgbox.com/db/af/CpyLY3SV_t.jpg", color: "#34D399", direccion: { calle: "Emerson", numero: "243", colonia: "Polanco V Sección" }, proveedor: { nombre: "Servicios AH Leal", contacto: "Alejandro Mota", email: "serviciosahleal@gmail.com", telefono: "55 5437 0804" } }
+            ];
+            try {
+                status('syncing', 'Inicializando...');
+                for (const e of emp) await db.collection('empresas').add(e);
+                await load();
+                notif('✓ 9 empresas agregadas');
+            } catch (e) {
+                notif('❌ Error: ' + e.message);
+                status('synced', 'Error');
+            }
+        }
+
+        load();
     </script>
 </body>
 </html>
