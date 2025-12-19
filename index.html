@@ -276,7 +276,7 @@
             g.innerHTML = '';
             data.forEach(e => g.appendChild(createCard(e)));
         }
-        // Crear tarjeta
+       // Crear tarjeta
         function createCard(e) {
             const c = document.createElement('div');
             c.className = 'card';
@@ -522,42 +522,264 @@
             a.click();
             notif('✓ Datos exportados');
         }
-
         // Inicializar datos
         async function init() {
             const emp = [
-                { nombreComercial: "Actividades Inteligentes", razonSocial: "Actividades Inteligentes DS SAPI de CV", responsable: "", logo: "https://thumbs2.imgbox.com/be/6f/X3aIUYqg_t.jpg", color: "#FF6B6B", mapsUrl: "https://maps.app.goo.gl/HmHRhzYm6vqjiVUp8", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.399382034954!2d-99.2103008!3d19.4383402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2032162d3e6cf%3A0xed6ae0b41e8ebe51!2sSach%20Plaza%20Polanco!5e0!3m2!1ses!2smx!4v1764961745574!5m2!1ses!2smx", direccion: { calle: "Jaime Balmes", numero: "11", piso: "4", numInt: "Torre B Of. 402", colonia: "Polanco I Sección", alcaldia: "Miguel Hidalgo", cp: "11510", ciudad: "CDMX" }, proveedor: { nombre: "Sach Plaza Polanco", contacto: "Sergio Ramírez", email: "gerenciaplazapolanco@sach.mx", telefono: "55 4165 5959", whatsapp: "" }, contacto: { email: "contacto@inteligenteds.com", telefono: "", dominio: "https://inteligenteds.com/" }, redes: { facebook: "https://www.facebook.com/Actividades-Inteligentes-DS-101893858600101", linkedin: "https://www.linkedin.com/company/actividades-inteligentes/" }, camposPersonalizados: {} },
-                { nombreComercial: "Diseños y Aplicaciones T&C", razonSocial: "Diseños y Aplicaciones T&C S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c3/8b/RWtwVANG_t.jpg", color: "#4ECDC4", mapsUrl: "https://maps.app.goo.gl/NJ1qaHeuYEi6HWAY7", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26141.425176405515!2d-99.22558047896842!3d19.420317699708843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f95abba91625%3A0xc74045f09dce410a!2sSach%20Lago%20Alberto!5e0!3m2!1ses!2smx!4v1764962183476!5m2!1ses!2smx", direccion: { calle: "Lago Alberto", numero: "442", piso: "5", numInt: "503A", colonia: "Anáhuac I Sección", alcaldia: "Miguel Hidalgo", cp: "11320", ciudad: "CDMX" }, proveedor: { nombre: "Sach Lago Alberto", contacto: "Gabriela Mancilla", email: "gerencialagoalberto@sach.mx", telefono: "55 6813 3053", whatsapp: "" }, contacto: { email: "contacto@disenotc.com", telefono: "", dominio: "https://disenotc.com/" }, redes: { facebook: "https://www.facebook.com/share/1FzdSfTALa/?mibextid=wwXIfr", twitter: "https://x.com/disenostyc?s=21", youtube: "https://youtube.com/@disenosyaplicacionestc5136?si=ug3KoMyH3Gl89onZ", tiktok: "https://www.tiktok.com/@disenotc?_r=1&_t=ZS-91xbKQ78Isy", instagram: "https://www.instagram.com/disenostyc_mx?igsh=Z3RiZDJkdTVkbnN5" }, camposPersonalizados: {} },
-                { nombreComercial: "Gala HR", razonSocial: "Gala Human Resources Services S.A.P.I. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c7/81/D5wnmrJk_t.jpg", color: "#FFD93D", mapsUrl: "https://maps.app.goo.gl/ToaaBUHNmdW4yFPZ9", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5490158006473!2d-99.18361152417192!3d19.431882240702723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9e141972583%3A0x771e12ec96eb1b01!2sFast%20Office%20Masaryk!5e0!3m2!1ses!2smx!4v1764961851513!5m2!1ses!2smx", direccion: { calle: "Mariano Escobedo", numero: "510", piso: "", numInt: "Penthouse 2Ñ", colonia: "Anzures", alcaldia: "Miguel Hidalgo", cp: "11590", ciudad: "CDMX" }, proveedor: { nombre: "FAST OFFICE BIENES RAÍCES", contacto: "Eduardo Barragan Camacho", email: "anzurez@fastoffice.mx", telefono: "55 1334 3833", whatsapp: "" }, contacto: { email: "contacto@galahr.com", telefono: "55 7589 8052", dominio: "https://galahr.com/" }, redes: { facebook: "https://www.facebook.com/GalaHumanResources/", twitter: "https://twitter.com/HumanGala", youtube: "https://www.youtube.com/channel/UC_LgnMxLRuSx4Khuq_nx4iQ", tiktok: "https://www.tiktok.com/@galahrmx?_r=1&_t=ZS-91xbgEgbHKq", instagram: "https://www.instagram.com/gala_humanresources/", linkedin: "https://www.linkedin.com/company/galahrmx/posts/?feedView=all" }, camposPersonalizados: {} },
-                { nombreComercial: "Caivpe", razonSocial: "Grupo Caivpe S.A.de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/c6/a7/T6BWl1zB_t.jpg", color: "#6BCF7F", mapsUrl: "https://maps.app.goo.gl/cxupqqBjZ6A2t9276", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7263.358258906885!2d-99.20851779310507!3d19.428972577056896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2021d89c400bb%3A0x74f47d38f8bcf12a!2sSach%20Polanco%20Lomas!5e0!3m2!1ses!2smx!4v1764962147660!5m2!1ses!2smx", direccion: { calle: "Monte Elbruz", numero: "124", piso: "2", numInt: "212B", colonia: "Lomas de Chapultepec III Sección", alcaldia: "Miguel Hidalgo", cp: "11000", ciudad: "CDMX" }, proveedor: { nombre: "Sach Polanco Lomas", contacto: "Abigaíl Herrera", email: "polancoadministracion@sach.mx", telefono: "55 4748 0707", whatsapp: "" }, contacto: { email: "contacto@caivpe.com", telefono: "", dominio: "https://caivpe.com/" }, redes: { facebook: "https://www.facebook.com/grupocaivpe", twitter: "https://twitter.com/caivpe", youtube: "https://www.youtube.com/channel/UC3UfcJRoZvVuKXyL-tr6gig", instagram: "https://www.instagram.com/caivpemx/", linkedin: "https://www.linkedin.com/company/grupo-caivpe/" }, camposPersonalizados: {} },
-                { nombreComercial: "BDU", razonSocial: "Human Values Tisdale Sixp, S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/a5/db/28bD5e7C_t.jpg", color: "#A78BFA", mapsUrl: "https://maps.app.goo.gl/DkiLFNY8ho8ev1sc8", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.390658268554!2d-99.18289752417174!3d19.438716640484365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9eb5b43f4e7%3A0xede37e61734b429a!2sWeWork%20Espacio%20de%20Oficinas%20%26%20Coworking!5e0!3m2!1ses!2smx!4v1764961811864!5m2!1ses!2smx", direccion: { calle: "Lago Alberto", numero: "375", piso: "20", numInt: "Of. 20-104", colonia: "Anáhuac I Sección", alcaldia: "Miguel Hidalgo", cp: "11320", ciudad: "CDMX" }, proveedor: { nombre: "Wework", contacto: "Fernanda García", email: "lagoalberto@wework.com", telefono: "Sin teléfono (solo ticket/correo)", whatsapp: "" }, contacto: { email: "info@bdunity.com", telefono: "55 5341 1159", dominio: "https://bdunity.com/" }, redes: { facebook: "https://www.facebook.com/HumanValuesT/", twitter: "https://twitter.com/HumanValuesMx", youtube: "https://www.youtube.com/channel/UC_vk3235o1Hr-XtqdoNHwyQ/featured", tiktok: "https://www.tiktok.com/@bdunity?_r=1&_t=ZS-91xbqf1lj9k", instagram: "https://www.instagram.com/human_values.mx/", linkedin: "https://www.linkedin.com/company/humanvalues/about/" }, camposPersonalizados: {} },
-                { nombreComercial: "Impegno4", razonSocial: "Impegno4 Consultoria y Servicios Especializados S.A. de C.V", responsable: "", logo: "https://thumbs2.imgbox.com/85/23/Xqq7bcTo_t.jpg", color: "#F472B6", mapsUrl: "https://maps.app.goo.gl/8xkckHNp56DW2y4x7", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4056821031103!2d-99.18871622417183!3d19.438068340505012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d201ffb89e1161%3A0x9f1dcf3303c45a23!2sProyecto%207%20Coworking%20-%20Sede%20Polanco%20-%20CDMX!5e0!3m2!1ses!2smx!4v1764962014961!5m2!1ses!2smx", direccion: { calle: "Ejército Nacional", numero: "373", piso: "4", numInt: "Ofs. 401 y 402", colonia: "Granada", alcaldia: "Miguel Hidalgo", cp: "11520", ciudad: "CDMX" }, proveedor: { nombre: "Proyecto 7 Coworking", contacto: "Karen", email: "polanco.cdmx@proyecto7.com.mx", telefono: "55 2915 0796", whatsapp: "" }, contacto: { email: "contacto@impegno4.com", telefono: "", dominio: "https://impegno4.com/" }, redes: { facebook: "https://www.facebook.com/Impegno4-301940817386225/", twitter: "https://x.com/impegno41?s=11", youtube: "https://www.youtube.com/channel/UCeyJfYdZfdqzdcnKGkdwz1w?view_as=subscriber", instagram: "https://www.instagram.com/impegno.4/", linkedin: "https://www.linkedin.com/company/impegno4/" }, camposPersonalizados: {} },
-                { nombreComercial: "Piu Viaggio", razonSocial: "Pride Voyages S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/38/68/CRJwZakv_t.jpg", color: "#FB923C", mapsUrl: "https://maps.app.goo.gl/PURScQNVnNsKoahFA", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.523005779797!2d-99.18386372417186!3d19.4330049406668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9293194ed67%3A0xcbca0406ac451b43!2sSach%20Mariano%20Escobedo!5e0!3m2!1ses!2smx!4v1764961950778!5m2!1ses!2smx", direccion: { calle: "Calz. Mariano Escobedo", numero: "476", piso: "12", numInt: "Ofna. 1200B", colonia: "Anzures", alcaldia: "Miguel Hidalgo", cp: "11590", ciudad: "CDMX" }, proveedor: { nombre: "Sach Mariano Escobedo", contacto: "No proporcionado", email: "gerenciamarianoescobedo@sach.mx", telefono: "55 9262 4240", whatsapp: "" }, contacto: { email: "contacto@piuviaggio.com", telefono: "", dominio: "https://piuviaggio.com/" }, redes: { facebook: "https://www.facebook.com/PiuViaggio/", twitter: "https://twitter.com/PiuViaggio", youtube: "https://www.youtube.com/channel/UCVCA0p94pio9cxRzur6zCsg", instagram: "https://www.instagram.com/piu.viaggio/?hl=es-la" }, camposPersonalizados: {} },
-                { nombreComercial: "Soluciones Administrativas R&A", razonSocial: "Soluciones Administrativas R&A S.A. de C.V.", responsable: "", logo: "https://thumbs2.imgbox.com/d9/ba/6GiUUGXm_t.jpg", color: "#60A5FA", mapsUrl: "https://maps.app.goo.gl/Hi2kwbCZLphvwvMZ8", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.49936329625!2d-99.19383821499083!3d19.43402539384204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8aa64410f0d%3A0x347da0b76853dc39!2sEmerson%20243%2C%20Polanco%2C%20Polanco%20V%20Secc%2C%20Miguel%20Hidalgo%2C%2011560%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1764961898612!5m2!1ses!2smx", direccion: { calle: "Emerson", numero: "243", piso: "3", numInt: "N/A", colonia: "Polanco V Sección", alcaldia: "Miguel Hidalgo", cp: "11560", ciudad: "CDMX" }, proveedor: { nombre: "Servicios AH Leal", contacto: "Alejandro Mota", email: "serviciosahleal@gmail.com", telefono: "55 5437 0804", whatsapp: "5554370804" }, contacto: { email: "contacto@adminra.com", telefono: "", dominio: "https://adminra.com/" }, redes: {}, camposPersonalizados: {} },
-                { nombreComercial: "Mesón Delta", razonSocial: "TU ORDEN LATAM", responsable: "", logo: "https://thumbs2.imgbox.com/db/af/CpyLY3SV_t.jpg", color: "#34D399", mapsUrl: "https://maps.app.goo.gl/Hi2kwbCZLphvwvMZ8", mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.49936329625!2d-99.19383821499083!3d19.43402539384204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8aa64410f0d%3A0x347da0b76853dc39!2sEmerson%20243%2C%20Polanco%2C%20Polanco%20V%20Secc%2C%20Miguel%20Hidalgo%2C%2011560%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1764961898612!5m2!1ses!2smx", direccion: { calle: "Emerson", numero: "243", piso: "3", numInt: "N/A", colonia: "Polanco V Sección", alcaldia: "Miguel Hidalgo", cp: "11560", ciudad: "CDMX" }, proveedor: { nombre: "Servicios AH Leal", contacto: "Alejandro Mota", email: "serviciosahleal@gmail.com", telefono: "55 5437 0804", whatsapp: "5554370804" }, contacto: { email: "contacto@mesondelta.com", telefono: "", dominio: "https://mesondelta.com/" }, redes: { facebook: "https://www.facebook.com/share/1DS52DbbWa/?mibextid=wwXIfr", youtube: "https://www.youtube.com/@mesondelta", tiktok: "https://www.tiktok.com/@mesondelta?_t=ZS-90KytR7YNb0&_r=1", instagram: "https://www.instagram.com/mesondelta_/?igsh=MWhuaDcxajc0aG92Mg%3D%3D#", linkedin: "linkedin.com/company/meson-delta/" }, camposPersonalizados: {} }
-];
+                {
+                    nombreComercial: "Actividades Inteligentes",
+                    razonSocial: "Actividades Inteligentes DS SAPI de CV",
+                    responsable: "",
+                    logo: "https://thumbs2.imgbox.com/be/6f/X3aIUYqg_t.jpg",
+                    color: "#FF6B6B",
+                    mapsUrl: "https://maps.app.goo.gl/HmHRhzYm6vqjiVUp8",
+                    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.399382034954!2d-99.2103008!3d19.4383402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2032162d3e6cf%3A0xed6ae0b41e8ebe51!2sSach%20Plaza%20Polanco!5e0!3m2!1ses!2smx!4v1764961745574!5m2!1ses!2smx",
+                    direccion: {
+                        calle: "Jaime Balmes", numero: "11", piso: "4", numInt: "Torre B Of. 402",
+                        colonia: "Polanco I Sección", alcaldia: "Miguel Hidalgo", cp: "11510", ciudad: "CDMX"
+                    },
+                    proveedor: {
+                        nombre: "Sach Plaza Polanco", contacto: "Sergio Ramírez",
+                        email: "gerenciaplazapolanco@sach.mx", telefono: "55 4165 5959", whatsapp: ""
+                    },
+                    contacto: { email: "contacto@inteligenteds.com", telefono: "", dominio: "https://inteligenteds.com/" },
+                    redes: {
+                        facebook: "https://www.facebook.com/Actividades-Inteligentes-DS-101893858600101",
+                        linkedin: "https://www.linkedin.com/company/actividades-inteligentes/"
+                    },
+                    camposPersonalizados: {}
+                },
+                {
+                    nombreComercial: "Diseños y Aplicaciones T&C",
+                    razonSocial: "Diseños y Aplicaciones T&C S.A. de C.V.",
+                    responsable: "",
+                    logo: "https://thumbs2.imgbox.com/c3/8b/RWtwVANG_t.jpg",
+                    color: "#4ECDC4",
+                    mapsUrl: "https://maps.app.goo.gl/NJ1qaHeuYEi6HWAY7",
+                    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26141.425176405515!2d-99.22558047896842!3d19.420317699708843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f95abba91625%3A0xc74045f09dce410a!2sSach%20Lago%20Alberto!5e0!3m2!1ses!2smx!4v1764962183476!5m2!1ses!2smx",
+                    direccion: {
+                        calle: "Lago Alberto", numero: "442", piso: "5", numInt: "503A",
+                        colonia: "Anáhuac I Sección", alcaldia: "Miguel Hidalgo", cp: "11320", ciudad: "CDMX"
+                    },
+                    proveedor: {
+                        nombre: "Sach Lago Alberto", contacto: "Gabriela Mancilla",
+                        email: "gerencialagoalberto@sach.mx", telefono: "55 6813 3053", whatsapp: ""
+                    },
+                    contacto: { email: "contacto@disenotc.com", telefono: "", dominio: "https://disenotc.com/" },
+                    redes: {
+                        facebook: "https://www.facebook.com/share/1FzdSfTALa/?mibextid=wwXIfr",
+                        twitter: "https://x.com/disenostyc?s=21",
+                        youtube: "https://youtube.com/@disenosyaplicacionestc5136?si=ug3KoMyH3Gl89onZ",
+                        tiktok: "https://www.tiktok.com/@disenotc?_r=1&_t=ZS-91xbKQ78Isy",
+                        instagram: "https://www.instagram.com/disenostyc_mx?igsh=Z3RiZDJkdTVkbnN5"
+                    },
+                    camposPersonalizados: {}
+                },
+                {
+                    nombreComercial: "Gala HR",
+                    razonSocial: "Gala Human Resources Services S.A.P.I. de C.V.",
+                    responsable: "",
+                    logo: "https://thumbs2.imgbox.com/c7/81/D5wnmrJk_t.jpg",
+                    color: "#FFD93D",
+                    mapsUrl: "https://maps.app.goo.gl/ToaaBUHNmdW4yFPZ9",
+                    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5490158006473!2d-99.18361152417192!3d19.431882240702723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9e141972583%3A0x771e12ec96eb1b01!2sFast%20Office%20Masaryk!5e0!3m2!1ses!2smx!4v1764961851513!5m2!1ses!2smx",
+                    direccion: {
+                        calle: "Mariano Escobedo", numero: "510", piso: "", numInt: "Penthouse 2Ñ",
+                        colonia: "Anzures", alcaldia: "Miguel Hidalgo", cp: "11590", ciudad: "CDMX"
+                    },
+                    proveedor: {
+                        nombre: "FAST OFFICE BIENES RAÍCES", contacto: "Eduardo Barragan Camacho",
+                        email: "anzurez@fastoffice.mx", telefono: "55 1334 3833", whatsapp: ""
+                    },
+                    contacto: { email: "contacto@galahr.com", telefono: "55 7589 8052", dominio: "https://galahr.com/" },
+                    redes: {
+                        facebook: "https://www.facebook.com/GalaHumanResources/",
+                        twitter: "https://twitter.com/HumanGala",
+                        youtube: "https://www.youtube.com/channel/UC_LgnMxLRuSx4Khuq_nx4iQ",
+                        tiktok: "https://www.tiktok.com/@galahrmx?_r=1&_t=ZS-91xbgEgbHKq",
+                        instagram: "https://www.instagram.com/gala_humanresources/",
+                        linkedin: "https://www.linkedin.com/company/galahrmx/posts/?feedView=all"
+                    },
+                    camposPersonalizados: {}
+                },
+                {
+                    nombreComercial: "Caivpe",
+                    razonSocial: "Grupo Caivpe S.A.de C.V.",
+                    responsable: "",
+                    logo: "https://thumbs2.imgbox.com/c6/a7/T6BWl1zB_t.jpg",
+                    color: "#6BCF7F",
+                    mapsUrl: "https://maps.app.goo.gl/cxupqqBjZ6A2t9276",
+                    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7263.358258906885!2d-99.20851779310507!3d19.428972577056896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2021d89c400bb%3A0x74f47d38f8bcf12a!2sSach%20Polanco%20Lomas!5e0!3m2!1ses!2smx!4v1764962147660!5m2!1ses!2smx",
+                    direccion: {
+                        calle: "Monte Elbruz", numero: "124", piso: "2", numInt: "212B",
+                        colonia: "Lomas de Chapultepec III Sección", alcaldia: "Miguel Hidalgo", cp: "11000", ciudad: "CDMX"
+                    },
+                    proveedor: {
+                        nombre: "Sach Polanco Lomas", contacto: "Abigaíl Herrera",
+                        email: "polancoadministracion@sach.mx", telefono: "55 4748 0707", whatsapp: ""
+                    },
+                    contacto: { email: "contacto@caivpe.com", telefono: "", dominio: "https://caivpe.com/" },
+                    redes: {
+                        facebook: "https://www.facebook.com/grupocaivpe",
+                        twitter: "https://twitter.com/caivpe",
+                        youtube: "https://www.youtube.com/channel/UC3UfcJRoZvVuKXyL-tr6gig",
+                        instagram: "https://www.instagram.com/caivpemx/",
+                        linkedin: "https://www.linkedin.com/company/grupo-caivpe/"
+                    },
+                    camposPersonalizados: {}
+                },
+                {
+                    nombreComercial: "BDU",
+                    razonSocial: "Human Values Tisdale Sixp, S.A. de C.V.",
+                    responsable: "",
+                    logo: "https://thumbs2.imgbox.com/a5/db/28bD5e7C_t.jpg",
+                    color: "#A78BFA",
+                    mapsUrl: "https://maps.app.goo.gl/DkiLFNY8ho8ev1sc8",
+                    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.390658268554!2d-99.18289752417174!3d19.438716640484365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9eb5b43f4e7%3A0xede37e61734b429a!2sWeWork%20Espacio%20de%20Oficinas%20%26%20Coworking!5e0!3m2!1ses!2smx!4v1764961811864!5m2!1ses!2smx",
+                    direccion: {
+                        calle: "Lago Alberto", numero: "375", piso: "20", numInt: "Of. 20-104",
+                        colonia: "Anáhuac I Sección", alcaldia: "Miguel Hidalgo", cp: "11320", ciudad: "CDMX"
+                    },
+                    proveedor: {
+                        nombre: "Wework", contacto: "Fernanda García",
+                        email: "lagoalberto@wework.com", telefono: "Sin teléfono (solo ticket/correo)", whatsapp: ""
+                    },
+                    contacto: { email: "info@bdunity.com", telefono: "55 5341 1159", dominio: "https://bdunity.com/" },
+                    redes: {
+                        facebook: "https://www.facebook.com/HumanValuesT/",
+                        twitter: "https://twitter.com/HumanValuesMx",
+                        youtube: "https://www.youtube.com/channel/UC_vk3235o1Hr-XtqdoNHwyQ/featured",
+                        tiktok: "https://www.tiktok.com/@bdunity?_r=1&_t=ZS-91xbqf1lj9k",
+                        instagram: "https://www.instagram.com/human_values.mx/",
+                        linkedin: "https://www.linkedin.com/company/humanvalues/about/"
+                    },
+                    camposPersonalizados: {}
+                },
+                {
+                    nombreComercial: "Impegno4",
+                    razonSocial: "Impegno4 Consultoria y Servicios Especializados S.A. de C.V",
+                    responsable: "",
+                    logo: "https://thumbs2.imgbox.com/85/23/Xqq7bcTo_t.jpg",
+                    color: "#F472B6",
+                    mapsUrl: "https://maps.app.goo.gl/8xkckHNp56DW2y4x7",
+                    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4056821031103!2d-99.18871622417183!3d19.438068340505012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d201ffb89e1161%3A0x9f1dcf3303c45a23!2sProyecto%207%20Coworking%20-%20Sede%20Polanco%20-%20CDMX!5e0!3m2!1ses!2smx!4v1764962014961!5m2!1ses!2smx",
+                    direccion: {
+                        calle: "Ejército Nacional", numero: "373", piso: "4", numInt: "Ofs. 401 y 402",
+                        colonia: "Granada", alcaldia: "Miguel Hidalgo", cp: "11520", ciudad: "CDMX"
+                    },
+                    proveedor: {
+                        nombre: "Proyecto 7 Coworking", contacto: "Karen",
+                        email: "polanco.cdmx@proyecto7.com.mx", telefono: "55 2915 0796", whatsapp: ""
+                    },
+                    contacto: { email: "contacto@impegno4.com", telefono: "", dominio: "https://impegno4.com/" },
+                    redes: {
+                        facebook: "https://www.facebook.com/Impegno4-301940817386225/",
+                        twitter: "https://x.com/impegno41?s=11",
+                        youtube: "https://www.youtube.com/channel/UCeyJfYdZfdqzdcnKGkdwz1w?view_as=subscriber",
+                        instagram: "https://www.instagram.com/impegno.4/",
+                        linkedin: "https://www.linkedin.com/company/impegno4/"
+                    },
+                    camposPersonalizados: {}
+                },
+                {
+                    nombreComercial: "Piu Viaggio",
+                    razonSocial: "Pride Voyages S.A. de C.V.",
+                    responsable: "",
+                    logo: "https://thumbs2.imgbox.com/38/68/CRJwZakv_t.jpg",
+                    color: "#FB923C",
+                    mapsUrl: "https://maps.app.goo.gl/PURScQNVnNsKoahFA",
+                    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.523005779797!2d-99.18386372417186!3d19.4330049406668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9293194ed67%3A0xcbca0406ac451b43!2sSach%20Mariano%20Escobedo!5e0!3m2!1ses!2smx!4v1764961950778!5m2!1ses!2smx",
+                    direccion: {
+                        calle: "Calz. Mariano Escobedo", numero: "476", piso: "12", numInt: "Ofna. 1200B",
+                        colonia: "Anzures", alcaldia: "Miguel Hidalgo", cp: "11590", ciudad: "CDMX"
+                    },
+                    proveedor: {
+                        nombre: "Sach Mariano Escobedo", contacto: "No proporcionado",
+                        email: "gerenciamarianoescobedo@sach.mx", telefono: "55 9262 4240", whatsapp: ""
+                    },
+                    contacto: { email: "contacto@piuviaggio.com", telefono: "", dominio: "https://piuviaggio.com/" },
+                    redes: {
+                        facebook: "https://www.facebook.com/PiuViaggio/",
+                        twitter: "https://twitter.com/PiuViaggio",
+                        youtube: "https://www.youtube.com/channel/UCVCA0p94pio9cxRzur6zCsg",
+                        instagram: "https://www.instagram.com/piu.viaggio/?hl=es-la"
+                    },
+                    camposPersonalizados: {}
+                },
+                {
+                    nombreComercial: "Soluciones Administrativas R&A",
+                    razonSocial: "Soluciones Administrativas R&A S.A. de C.V.",
+                    responsable: "",
+                    logo: "https://thumbs2.imgbox.com/d9/ba/6GiUUGXm_t.jpg",
+                    color: "#60A5FA",
+                    mapsUrl: "https://maps.app.goo.gl/Hi2kwbCZLphvwvMZ8",
+                    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.49936329625!2d-99.19383821499083!3d19.43402539384204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8aa64410f0d%3A0x347da0b76853dc39!2sEmerson%20243%2C%20Polanco%2C%20Polanco%20V%20Secc%2C%20Miguel%20Hidalgo%2C%2011560%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1764961898612!5m2!1ses!2smx",
+                    direccion: {
+                        calle: "Emerson", numero: "243", piso: "3", numInt: "N/A",
+                        colonia: "Polanco V Sección", alcaldia: "Miguel Hidalgo", cp: "11560", ciudad: "CDMX"
+                    },
+                    proveedor: {
+                        nombre: "Servicios AH Leal", contacto: "Alejandro Mota",
+                        email: "serviciosahleal@gmail.com", telefono: "55 5437 0804", whatsapp: "5554370804"
+                    },
+                    contacto: { email: "contacto@adminra.com", telefono: "", dominio: "https://adminra.com/" },
+                    redes: {},
+                    camposPersonalizados: {}
+                },
+                {
+                    nombreComercial: "Mesón Delta",
+                    razonSocial: "TU ORDEN LATAM",
+                    responsable: "",
+                    logo: "https://thumbs2.imgbox.com/db/af/CpyLY3SV_t.jpg",
+                    color: "#34D399",
+                    mapsUrl: "https://maps.app.goo.gl/Hi2kwbCZLphvwvMZ8",
+                    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.49936329625!2d-99.19383821499083!3d19.43402539384204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8aa64410f0d%3A0x347da0b76853dc39!2sEmerson%20243%2C%20Polanco%2C%20Polanco%20V%20Secc%2C%20Miguel%20Hidalgo%2C%2011560%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1764961898612!5m2!1ses!2smx",
+                    direccion: {
+                        calle: "Emerson", numero: "243", piso: "3", numInt: "N/A",
+                        colonia: "Polanco V Sección", alcaldia: "Miguel Hidalgo", cp: "11560", ciudad: "CDMX"
+                    },
+                    proveedor: {
+                        nombre: "Servicios AH Leal", contacto: "Alejandro Mota",
+                        email: "serviciosahleal@gmail.com", telefono: "55 5437 0804", whatsapp: "5554370804"
+                    },
+                    contacto: { email: "contacto@mesondelta.com", telefono: "", dominio: "https://mesondelta.com/" },
+                    redes: {
+                        facebook: "https://www.facebook.com/share/1DS52DbbWa/?mibextid=wwXIfr",
+                        youtube: "https://www.youtube.com/@mesondelta",
+                        tiktok: "https://www.tiktok.com/@mesondelta?_t=ZS-90KytR7YNb0&_r=1",
+                        instagram: "https://www.instagram.com/mesondelta_/?igsh=MWhuaDcxajc0aG92Mg%3D%3D#",
+                        linkedin: "linkedin.com/company/meson-delta/"
+                    },
+                    camposPersonalizados: {}
+                }
+            ];
+            
             try {
-            document.getElementById('load').innerHTML = `<div class="spin"></div><div style="color: var(--text); font-size: 1.1rem; font-weight: 600;">Cargando 9 empresas a Firebase...</div>`;
-            status('syncing', 'Inicializando...');
-            for (const e of emp) await db.collection('empresas').add(e);
-            await load();
-            notif('✓ 9 empresas cargadas exitosamente');
-        } catch (e) {
-            notif('❌ Error: ' + e.message);
-            status('synced', 'Error');
+                document.getElementById('load').innerHTML = `
+                    <div class="spin"></div>
+                    <div style="color: var(--text); font-size: 1.1rem; font-weight: 600;">Cargando 9 empresas a Firebase...</div>
+                `;
+                status('syncing', 'Inicializando...');
+                for (const e of emp) {
+                    await db.collection('empresas').add(e);
+                }
+                await load();
+                notif('✓ 9 empresas cargadas exitosamente');
+            } catch (e) {
+                notif('❌ Error: ' + e.message);
+                status('synced', 'Error');
+            }
         }
-    }
 
-    // Cerrar modales al click fuera
-    document.getElementById('modalResp').addEventListener('click', function(e) {
-        if (e.target === this) closeResp();
-    });
-    document.getElementById('modalCampos').addEventListener('click', function(e) {
-        if (e.target === this) closeCampos();
-    });
+        // Cerrar modales al click fuera
+        document.getElementById('modalResp').addEventListener('click', function(e) {
+            if (e.target === this) closeResp();
+        });
+        document.getElementById('modalCampos').addEventListener('click', function(e) {
+            if (e.target === this) closeCampos();
+        });
 
-    // Iniciar
-    load();
-</script>
+        // Iniciar
+        load();
+    </script>
 </body>
 </html>
